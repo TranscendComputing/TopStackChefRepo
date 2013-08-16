@@ -1,0 +1,52 @@
+= DESCRIPTION:
+
+Install and configure Loadbalancer.
+
+= REQUIREMENTS:
+
+== Platform:
+
+Tested on Ubuntu 11.10.  YMMV on other platforms.
+
+==Cookbooks:
+
+Requres Opscode's runit cookbooks.  
+
+= ATTRIBUTES:
+
+You may need to tweak.
+
+= USAGE:
+
+This cookbook makes a few assumptions about where files live:
+
+/root/haproxy.conf: configuration files
+
+Use haprocy::default to install and configure haproxy, and start the 
+haproxy service.
+
+The ebs_volume recipe expects an "aws" databag with a "main" databag 
+item.  The schema of this item is:
+{
+  "config":{
+  	"name" :
+  	"listeners" :[
+  	  { 
+  		"loadbalancer_port" :
+  		"instance_port" :
+  		"instances" : [
+  		  { "ip_address":
+  		  }, ...
+  		]
+  	  },...
+  	]
+  }
+}
+
+Note that for each instance of listener a haproxy instance will be run
+
+= LICENSE and AUTHOR:
+
+Author:: Raj Arora (<rarora@momentumsi.com>)
+
+Copyright:: 2012, Transcend Computing

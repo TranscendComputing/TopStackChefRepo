@@ -1,0 +1,35 @@
+ListenHTTPS
+<%
+instancePort=""
+@config['Listeners'].each do |listener| 
+	if(listener['protocol'] == "https" || listener['protocol'] == "HTTPS")
+		instancePort = listener['InstancePort']
+%>	
+	Address 0.0.0.0
+    Port    <%= listener['LoadBalancerPort']%>
+    Cert    "/etc/ssl/local.server.pem"
+<% 
+	end
+end
+%>
+End
+
+Service
+<% 
+if(instancePort != "")
+	if !@config['InstanceData'].nil?
+	  c=0
+	  @config['InstanceData'].each do |i|
+		c=c+1
+%>
+	BackEnd
+        Address <%= i['privateIpAddress'] %>
+        Port    <%= instancePort %>
+    End
+<% 
+	  end
+	end
+end
+%>
+End
+

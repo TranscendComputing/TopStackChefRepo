@@ -1,0 +1,60 @@
+global
+	log 127.0.0.1	local0
+	log 127.0.0.1	local1 notice
+	#log loghost	local0 info
+	maxconn 4096
+	#chroot /usr/share/haproxy
+	user haproxy
+	group haproxy
+	daemon
+
+defaults
+	log	global
+	mode	http
+	option	httplog
+	option	dontlognull
+	retries	3
+	option redispatch
+	maxconn	2000
+	contimeout	5000
+	clitimeout	50000
+	srvtimeout	50000
+
+<%
+@config['Listeners'].each do |listener| 
+%>	
+
+frontend appl<%= listener['LoadBalancerPort']%>
+	bind *:<%= listener['LoadBalancerPort']%>
+    default_backend appl<%= listener['LoadBalancerPort']%>_backend
+<% 
+	if !@config['InstanceData'].nil?
+	  	c=0
+%>
+
+backend appl<%= listener['LoadBalancerPort']%>_backend
+		mode	http
+<% 	
+		if !@config['AppCookieStickinessPolicy'].nil? %>
+		cookie <%= @config['AppCookieStickinessPolicy'][0]['CookieName'] %> rewrite
+<%		end %>
+<% 		if !@config['LBCookieStickinessPolicy'].nil? %>
+		cookie transcendcookie insert <% if !@config['LBCookieStickinessPolicy'][0]['CookieExpirationPeriod'].nil? %>maxlife <%= @config['LBCookieStickinessPolicy'][0]['CookieExpirationPeriod'] %>s <% end%>
+<% 		end %>
+		balance	roundrobin
+<% 		if !@config['HealthCheck'].nil?
+		target = @config['HealthCheck']['Target']
+		match = Regexp.compile('^(.*):([0-9]*)\/(.*)').match(target)
+		target=match[3]
+%>
+		option httpchk /<%= target %>
+<%		end %>			
+<%	  
+		@config['InstanceData'].each do |i|
+			c=c+1
+%>
+			server server<%= c %> <%= i['publicIp'] %>:<%= listener['InstancePort']%><% if !@config['HealthCheck'].nil? %> check port <%= listener['InstancePort']%> inter <%= @config['HealthCheck']['Interval']%>s rise <%= @config['HealthCheck']['HealthyThreshold']%> fall <%= @config['HealthCheck']['UnhealthyThreshold']%><% end %><% if !@config['AppCookieStickinessPolicy'].nil? %> cookie <%= @config['AppCookieStickinessPolicy'][0]['CookieName'] %>_server<%= c %><%	end %><% if !@config['LBCookieStickinessPolicy'].nil? %> cookie transcendcookie_server<%= c %><% end%>
+<% 	  	end %>
+<%	end	%>
+<% end %>
+

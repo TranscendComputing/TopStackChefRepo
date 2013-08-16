@@ -1,0 +1,42 @@
+Description
+===========
+
+Installs and configures a VM instance to be ready to run TopStack.
+
+Requirements
+============
+
+Platform
+--------
+
+* Debian, Ubuntu
+
+Tested on:
+
+* Ubuntu 11.10
+
+Cookbooks
+---------
+
+Requres Opscode's runit cookbooks.  
+
+Attributes
+==========
+
+Usage
+=====
+
+Changes/Roadmap
+===============
+
+License and Author
+==================
+
+
+Author:: John Gardner (<jgardner@transcendcomputing.com>)
+
+Copyright:: 2012, Transcend Computing
+
+
+echo "RESERVATION     r-CD133D02     480836315940     transcend-topstack\n
+INSTANCE     i-7B7E3F93     emi-12543B4C     0.0.0.0     0.0.0.0     pending     jgardner     0          m1.large     2012-08-17T18:23:58.449Z     msicluster1     eki-3430374E     eri-AF813779          monitoring-disabled     0.0.0.0     0.0.0.0               instance-store          

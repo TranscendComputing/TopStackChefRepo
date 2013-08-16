@@ -1,0 +1,91 @@
+#
+# Configured by Chef. Logcal changes will be lost.
+#
+# memcached default config file
+# 2003 - Jay Bonci <jaybonci@debian.org>
+# This configuration file is read by the start-memcached script provided as
+# part of the Debian GNU/Linux distribution. 
+
+# revision of this file; used by cloud engine to restart the memcached on change of parameters
+# revision <%= @revision %>
+
+# Run memcached as a daemon. This command is implied, and is not needed for the
+# daemon to run. See the README.Debian that comes with this package for more
+# information.
+-d
+
+# Log memcached's output to /var/log/memcached
+logfile /var/log/memcached.log
+
+# Be verbose
+-v
+
+# Be even more verbose (print client commands as well)
+# -vv
+
+# Start with a cap of 64 megs of memory. It's reasonable, and the daemon default
+# Note that the daemon will grow to this size, but does not start out holding this much
+# memory
+-m <%= @memory %>
+
+# Default connection port is 11211
+-p <%= @port %>
+
+# Run the daemon as root. The start-memcached will default to running as root if no
+# -u command is present in this config file
+-u <%= @user %>
+
+# Specify which IP address to listen on. The default is to listen on all IP addresses
+# This parameter is one of the only security measures that memcached has, so make sure
+# it's listening on a firewalled interface.
+-l <%= @listen %>
+
+# Limit the number of simultaneous incoming connections. The daemon default is 1024
+-c <%= @max_simultaneous_connections %>
+
+# Lock down all paged memory. Consult with the README and homepage before you do this
+<% if @lock_down_paged_memory %>
+-k
+<% end %>
+
+# Return error when memory is exhausted (rather than removing items)
+<% if @error_on_memory_exhausted %>
+-M
+<% end %>
+
+# Maximize core file limit
+<% if @maximize_core_file_limit %>
+-r
+<% end %>
+
+# Number of Threads
+-t <%= @num_threads %>
+
+# Cas Disabled
+<% if @cas_disabled %>
+-C
+<% end %>
+
+# Chunk Size Growth Factor
+-f <%= @chunk_size_growth_factor %>
+
+# Binding Protocol
+-B <%= @binding_protocol %>
+
+# Large Memory Pages
+<% if @large_memory_pages %>
+-L
+<% end %>
+
+# Requests per Event
+-R <%= @requests_per_event %>
+
+# Backlog queue limit
+-b <%= @backlog_queue_limit %>
+
+# Max Item Size (Size of each slab page)
+-I <%= @max_item_size  %>
+
+# Chunk Size
+-n <%= @chunk_size %>
+

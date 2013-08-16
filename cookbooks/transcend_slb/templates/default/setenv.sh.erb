@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# ${TOUGH_CONFIG_DIR} has ...context.xml files
+# ${TOUGH_CONFIG_DIR}/ftl has freemarker templates
+TOUGH_CONFIG_DIR=/var/lib/topstack/config
+export TOUGH_CONFIG_DIR
+
+# If your machine can ssh  to instance on public IP then it should be 'no' 
+# if it needs private ip address then it should be 'yes'
+USE_IP_FOR_INSTANCE=no
+export USE_IP_FOR_INSTANCE
+
+# id to be used to talk to chef api it should be same as set in knife.rb
+#CHEF_USER_ID=testinst.momentumsofware.com
+CHEF_USER_ID=<%= @hostname %>
+export CHEF_USER_ID
+
+# key to be used to talk to chef api it should be same as set in knife.rb
+CHEF_PRIVATE_KEY=/var/lib/topstack/keys/knife.pem
+export CHEF_PRIVATE_KEY
+
+# chef server api url
+CHEF_API_URL=http://localhost:4000
+export CHEF_API_URL
+
+# ip address by which instances can talk to chef server, it will be put in instances /etc/hosts
+CHEF_IP=<%= @publicip %>
+export CHEF_IP
+
+# servername by which instances can talk to chef server, it will be put in instances /etc/hosts
+CHEF_SERVER=transcend-chef-svr
+export CHEF_SERVER
+
+# directory where keys to be used to ssh into instances are stored
+KEYS_DIR=/var/lib/topstack/keys
+export KEYS_DIR
+
+# directory where .chef directory exists
+DOTCHEF_DIR=/var/lib/topstack/bin
+export DOTCHEF_DIR
+
+# instances will have hostname in this domain 
+FQDN_DOMAIN=<%= @elbdomain %>
+export FQDN_DOMAIN
+
+# instances will callback on this url at boot to install chef roles
+TRANSCEND_URL=http://${CHEF_IP}:8080/ASInternal
+export TRANSCEND_URL
+
+# ip address of yum repository, this will be added as <ip> YUMHOST in instance /etc/hosts
+YUMHOST=<%= @publicip %>
+export YUMHOST
+

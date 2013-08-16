@@ -1,0 +1,19 @@
+#!/bin/bash
+
+mysql -u root -p<%= node[:mysql][:server_root_password] %> << EOC
+<% if(!node['mysql']['db_name'].nil?) %>
+CREATE DATABASE \`<%= node['mysql']['db_name'] %>\`;
+<% end %>
+CREATE USER '<%= node[:mysql][:root_user] %>'@'%' IDENTIFIED BY '<%= node[:mysql][:server_root_password] %>';
+CREATE USER '<%= node[:mysql][:root_user] %>'@'localhost' IDENTIFIED BY '<%= node[:mysql][:server_root_password] %>';
+
+GRANT SELECT, EVENT, INSERT, UPDATE, DELETE, TRIGGER, CREATE, CREATE VIEW, SHOW VIEW, ALTER ROUTINE, CREATE ROUTINE, DROP, FILE, REFERENCES, INDEX, ALTER, SHOW DATABASES, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE ON *.* TO '<%= node[:mysql][:root_user] %>'@'%' WITH GRANT OPTION;
+GRANT SELECT, EVENT, INSERT, UPDATE, DELETE, TRIGGER, CREATE, CREATE VIEW, SHOW VIEW, ALTER ROUTINE, CREATE ROUTINE, DROP, FILE, REFERENCES, INDEX, ALTER, SHOW DATABASES, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE ON *.* TO '<%= node[:mysql][:root_user] %>'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+CREATE USER 'root'@'%' IDENTIFIED BY '<%= node[:mysql][:server_root_password] %>';
+GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY '<%= node['mysql']['server_root_password'] %>' WITH GRANT OPTION;
+EOC
+
+echo "Successfully created user <%= node[:mysql][:server_root_password] %>"
+

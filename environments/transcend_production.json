@@ -1,0 +1,9 @@
+{
+  "name": "transcend_production",
+  "json_class": "Chef::Environment",
+  "description": "Transcend Production Environment",
+  "cookbook_versions": {
+    "transcend_loadbalancer": "0.2.0"
+  },
+  "chef_type": "environment"
+}

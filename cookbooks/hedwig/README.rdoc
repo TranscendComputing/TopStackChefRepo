@@ -1,0 +1,10 @@
+= DESCRIPTION: This cookbook installs and runs the hedwig-server (hub).
+
+= REQUIREMENTS:
+Java
+
+= ATTRIBUTES:
+The attributes are inserted into the template hw_server.conf.erb to create the custom hw_server.conf file on the node. Please change the values accordingly before chef-client applies the role to the node.
+
+= USAGE:
+Use this cookbook to run hubs when you already have zookeeper(s) and bookies running.

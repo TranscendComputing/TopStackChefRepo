@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="ChefRepo" basedir="." default="dist">
+
+	<property file="${user.home}/${project.name}.properties"/>
+	<property file="${user.home}/build.properties"/>
+	<property name="config.filename" value="${user.name}.properties"/>
+	<property file="config/${config.filename}"/>
+
+	<property name="name" value="ChefRepo" />
+	<property name="project.base.dir" value="." />
+	<property name="src" value="${project.base.dir}/src" />
+	<property name="resources" value="${project.base.dir}/resources" />
+	<property name="test" value="${project.base.dir}/test" />
+	<property name="build" value="${project.base.dir}/build" />
+	<property name="lib" value="${build}/lib" />
+	<property name="cookbooks" value="cookbooks" />
+	<property name="roles" value="roles" />
+	<property name="environments" value="environments" />
+	<property name="data_bags" value="data_bags" />
+	<property name="external" value="${build}/external" />
+    <property name="external.dir" location="${external}" />
+	<property name="external.jars" value="${build}/external/lib" />
+	<property name="external.lib" value="${build}/external/lib" />
+	<property name="resources" value="${project.base.dir}/resources" />
+	<property value="" name="jars.ok" />
+	<property name="hudson.url" value="jenkins.momentumsoftware.com:8080/" />
+
+	<property name="toughresources.dir" value="${project.base.dir}/../ToughResources"/>
+    <import file="${toughresources.dir}/common.build.xml" />
+
+	<target name="init">
+		<mkdir dir="${build}" />
+		<mkdir dir="${external}" />
+		<mkdir dir="${external.lib}" />
+	</target>
+
+	<target name="dist" depends="clean,init">
+		<mkdir dir="${dist}" />
+		<tar destfile="${dist}/topstack-chef.tar.gz" compression="gzip">
+			<fileset dir=".">
+				<!-- include name="${cookbooks}/transcend_*/**"/ -->
+				<include name="${cookbooks}/**"/>
+			</fileset>
+			<fileset dir=".">
+				<include name="${roles}/transcend_*/**"/>
+				<include name="${roles}/Transcend_*/**"/>
+			</fileset>
+			<fileset dir=".">
+				<include name="${environments}/**"/>
+			    <exclude name="${environments}/*_development.*" />
+			    <exclude name="${environments}/README.md" />
+			</fileset>
+			<fileset dir=".">
+				<include name="${data_bags}/**"/>
+			    <exclude name="${data_bags}/README.md" />
+			</fileset>
+		</tar>
+	</target>
+
+    <target name="deploy" depends="dist">
+        <delete file="${project.base.dir}/.chef/knife.rb"/>
+        <copy todir="${project.base.dir}/.chef/">
+            <filterset>
+                <filter token="client.keys.dir" value="${user.dir}/resources/keys"/>
+                <filter token="env" value="${env}" />
+                <filter token="user.chef.dir" value="${project.base.dir}/.chef"/>
+            </filterset>
+            <filterset filtersfile="${user.home}/build.properties" onmissingfiltersfile="ignore"/>
+            <filterset filtersfile="${env.core.properties}"/>
+			<fileset dir="${project.base.dir}/resources/raw">
+				<include name="knife.rb"/>
+			</fileset>
+        </copy> 
+       <exec executable="knife">
+            <arg value="cookbook"/>
+            <arg value="upload"/>
+            <arg value="-c"/>
+            <arg value="${project.base.dir}/.chef/knife.rb" />
+            <arg value="-a"/>
+            <arg value="-o" />
+            <arg value="${user.dir}/cookbooks/" />
+        </exec>
+    </target>
+
+    <!-- Mostly for testing purposes -->
+    <target name="list-nodes" depends="dist">
+        <delete file="${project.base.dir}/.chef/knife.rb"/>
+        <copy todir="${project.base.dir}/.chef/">
+            <filterset>
+                <filter token="client.keys.dir" value="${user.dir}/resources/keys"/>
+                <filter token="env" value="${env}" />
+                <filter token="user.chef.dir" value="${project.base.dir}/.chef"/>
+            </filterset>
+            <filterset filtersfile="${user.home}/build.properties" onmissingfiltersfile="ignore"/>
+            <filterset filtersfile="${env.core.properties}"/>
+			<fileset dir="${project.base.dir}/resources/raw">
+				<include name="knife.rb"/>
+			</fileset>
+        </copy> 
+       <exec executable="knife">
+            <arg value="node"/>
+            <arg value="list"/>
+            <arg value="-c"/>
+            <arg value="${project.base.dir}/.chef/knife.rb" />
+        </exec>
+    </target>
+
+</project>

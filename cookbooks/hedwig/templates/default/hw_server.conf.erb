@@ -1,0 +1,11 @@
+# The ZooKeeper server host(s) for the Hedwig Server to use.
+zk_host=<%= @node[:hedwig][:zk_host] %>
+# The number of milliseconds of each tick in ZooKeeper.
+zk_timeout=<%= @node[:hedwig][:zk_timeout] %>
+# The port at which the clients will connect.
+server_port=<%= @node[:hedwig][:server_port] %>
+# The SSL port at which the clients will connect (only if SSL is enabled).
+ssl_server_port=<%= @node[:hedwig][:ssl_server_port] %>
+# Flag indicating if the server should also operate in SSL mode.
+ssl_enabled=<%= @node[:hedwig][:ssl_enabled] %>
+

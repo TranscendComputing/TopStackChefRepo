@@ -1,0 +1,7 @@
+%awsSecretAccessKeys = (
+    <%= @userName %> => {
+        id => '<%= @id %>',
+        key => '<%= @key %>',
+    }
+);
+

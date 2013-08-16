@@ -1,0 +1,600 @@
+#Chef for <%= node['hostname'] %>
+#
+# Local modifications will be overwritten.
+# 
+# The MySQL database server configuration file.
+#
+# You can copy this to one of:
+# - "/etc/mysql/my.cnf" to set global options,
+# - "~/.my.cnf" to set user-specific options.
+# 
+# One can use all long options that the program supports.
+# Run program with --help to get a list of available options and with
+# --print-defaults to see which it would actually understand and use.
+#
+# For explanations see
+# http://dev.mysql.com/doc/mysql/en/server-system-variables.html
+
+[client]
+<% unless node['mysql']['socket'].nil? %>
+socket = <%= node['mysql']['socket'] %>
+<% end %>
+
+[mysqld]
+
+user = mysql
+symbolic-links = 0
+<% unless node['mysql']['pid_file'].nil? %>
+pid-file = <%= node['mysql']['pid_file'] %>
+<% end %>
+<% unless node['mysql']['port'].nil? %>
+port = <%= node['mysql']['port'] %>
+<% end %>
+<% unless node['mysql']['data_dir'].nil? %>
+datadir = <%= node['mysql']['data_dir'] %>
+<% end %>
+<% unless node['mysql']['conf_dir'].nil? %>
+basedir = <%= node['mysql']['conf_dir'] %>
+<% end %>
+<% unless node['mysql']['socket'].nil? %>
+socket = <%= node['mysql']['socket'] %>
+<% end %>
+<% unless node['mysql']['tmpdir'].nil? %>
+tmpdir = <%= node['mysql']['tmpdir'] %>
+<% end %>
+<% unless node['mysql']['thread_cache_size'].nil? %>
+thread_cache_size = <%= node['mysql']['thread_cache_size'] %>
+<% else %>
+thread_cache_size = 64
+<% end %>
+<% unless node['mysql']['key_buffer_size'].nil? %>
+key_buffer = <%= node['mysql']['key_buffer_size'] %>
+<% end %>
+<% unless node['mysql']['sort_buffer_size'].nil? %>
+sort_buffer_size = <%= node['mysql']['sort_buffer_size'] %>
+<% end %>
+<% unless node['mysql']['read_buffer_size'].nil? %>
+read_buffer_size = <%= node['mysql']['read_buffer_size'] %>
+<% end %>
+<% unless node['mysql']['read_rnd_buffer_size'].nil? %>
+read_rnd_buffer_size = <%= node['mysql']['read_rnd_buffer_size'] %>
+<% end %>
+<% unless node['mysql']['max_allowed_packet'].nil? %>
+max_allowed_packet = <%= node['mysql']['max_allowed_packet'] %>
+<% end %>
+<% unless node['mysql']['max_heap_table_size'].nil? %>
+max_heap_table_size = <%= node['mysql']['max_heap_table_size'] %>
+<% end %>
+<% unless node['mysql']['tmp_table_size'].nil? %>
+tmp_table_size = <%= node['mysql']['tmp_table_size'] %>
+<% end %>
+<% unless node['mysql']['query_cache_size'].nil? %>
+query_cache_size = <%= node['mysql']['query_cache_size'] %>
+<% end %>
+<% unless node['mysql']['query_cache_type'].nil? %>
+query_cache_type = <%= node['mysql']['query_cache_type'] %>
+<% end %>
+<% unless node['mysql']['log_output'].nil? %>
+log_output = <%= node['mysql']['log_output'] %>
+<% end %>
+<% unless node['mysql']['slow_query_log'].nil? %>
+slow_query_log = <%= node['mysql']['slow_query_log'] %>
+<% end %>
+<% unless node['mysql']['log_error'].nil? %>
+log-error= <%= node['mysql']['log_error'] %>
+<% end %>
+<% unless node['mysql']['long_query_time'].nil? %>
+long_query_time = <%= node['mysql']['long_query_time'] %>
+<% end %>
+<% unless node['mysql']['innodb_data_home_dir'].nil? %>
+innodb_data_home_dir = <%= node['mysql']['innodb_data_home_dir'] %>
+<% end %>
+<% unless node['mysql']['innodb_buffer_pool_size'].nil? %>
+innodb_buffer_pool_size = <%= node['mysql']['innodb_buffer_pool_size'] %>
+<% end %>
+<% unless node['mysql']['innodb_flush_log_at_trx_commit'].nil? %>
+innodb_flush_log_at_trx_commit = <%= node['mysql']['innodb_flush_log_at_trx_commit'] %>
+<% end %>
+<% unless node['mysql']['innodb_additional_mem_pool_size'].nil? %>
+innodb_additional_mem_pool_size = <%= node['mysql']['innodb_additional_mem_pool_size'] %>
+<% end %>
+<% unless node['mysql']['innodb_support_xa'].nil? %>
+innodb_support_xa = <%= node['mysql']['innodb_support_xa'] %>
+<% end %>
+<% unless node['mysql']['innodb_lock_wait_timeout'].nil? %>
+innodb_lock_wait_timeout = <%= node['mysql']['innodb_lock_wait_timeout'] %>
+<% end %>
+<% unless node['mysql']['innodb_flush_method'].nil? %>
+innodb_flush_method = <%= node['mysql']['innodb_flush_method'] %>
+<% end %>
+<% unless node['mysql']['innodb_log_file_size'].nil? %>
+innodb_log_file_size = <%= node['mysql']['innodb_log_file_size'] %>
+<% end %>
+<% unless node['mysql']['innodb_log_buffer_size'].nil? %>
+innodb_log_buffer_size = <%= node['mysql']['innodb_log_buffer_size'] %>
+<% end %>
+<% unless node['mysql']['innodb_thread_concurrency'].nil? %>
+innodb_thread_concurrency = <%= node['mysql']['innodb_thread_concurrency'] %>
+<% end %>
+<% unless node['mysql']['binlog_cache_size'].nil? %>
+binlog_cache_size = <%= node['mysql']['binlog_cache_size'] %>
+<% end %>
+<% unless node['mysql']['binlog_format'].nil? %>
+binlog_format = <%= node['mysql']['binlog_format'] %>
+<% end %>
+<% unless node['mysql']['default_storage_engine'].nil? %>
+default-storage-engine = <%= node['mysql']['default_storage_engine'] %>
+<% end %>
+<% unless node['mysql']['innodb_file_per_table'].nil? %>
+innodb_file_per_table = <%= node['mysql']['innodb_file_per_table'] %>
+<% end %>
+<% unless node['mysql']['innodb_log_group_home_dir'].nil? %>
+innodb_log_group_home_dir = <%= node['mysql']['innodb_log_group_home_dir'] %>
+<% end %>
+<% unless node['mysql']['local_infile'].nil? %>
+local_infile = <%= node['mysql']['local_infile'] %>
+<% end %>
+<% unless node['mysql']['log-bin'].nil? %>
+log-bin = <%= node['mysql']['log-bin'] %>
+<% end %>
+<% unless node['mysql']['max_binlog_size'].nil? %>
+max_binlog_size = <%= node['mysql']['max_binlog_size'] %>
+<% end %>
+<% unless node['mysql']['max_connections'].nil? %>
+max_connections = <%= node['mysql']['max_connections'] %>
+<% end %>
+<% unless node['mysql']['read_only'].nil? %>
+read_only = <%= node['mysql']['read_only'] %>
+<% end %>
+<% unless node['mysql']['relay-log'].nil? %>
+relay-log = <%= node['mysql']['relay-log'] %>
+<% end %>
+<% unless node['mysql']['secure_file_priv'].nil? %>
+secure-file-priv = <%= node['mysql']['secure_file_priv'] %>
+<% end %>
+<% unless node['mysql']['server_id'].nil? %>
+server-id = <%= node['mysql']['server_id'] %>
+<% end %>
+<% unless node['mysql']['thread_stack'].nil? %>
+thread_stack = <%= node['mysql']['thread_stack'] %>
+<% end %>
+<% unless node['mysql']['allow-suspicious-udfs'].nil? %>
+allow-suspicious-udfs = <%= node['mysql']['allow-suspicious-udfs'] %>
+<% end %>
+<% unless node['mysql']['auto_increment_increment'].nil? %>
+auto-increment-increment = <%= node['mysql']['auto_increment_increment'] %>
+<% end %>
+<% unless node['mysql']['auto_increment_offset'].nil? %>
+auto_increment_offset = <%= node['mysql']['auto_increment_offset'] %>
+<% end %>
+<% unless node['mysql']['autocommit'].nil? %>
+autocommit = <%= node['mysql']['autocommit'] %>
+<% end %>
+<% unless node['mysql']['automatic_sp_privileges'].nil? %>
+automatic_sp_privileges = <%= node['mysql']['automatic_sp_privileges'] %>
+<% end %>
+<% unless node['mysql']['back_log'].nil? %>
+back_log = <%= node['mysql']['back_log'] %>
+<% end %>
+<% unless node['mysql']['bulk_insert_buffer_size'].nil? %>
+bulk_insert_buffer_size = <%= node['mysql']['bulk_insert_buffer_size'] %>
+<% end %>
+<% unless node['mysql']['character-set-client-handshake'].nil? %>
+character-set-client-handshake = <%= node['mysql']['character-set-client-handshake'] %>
+<% end %>
+<% unless node['mysql']['character_set_client'].nil? %>
+character_set_client = <%= node['mysql']['character_set_client'] %>
+<% end %>
+<% unless node['mysql']['character_set_connection'].nil? %>
+character_set_connection = <%= node['mysql']['character_set_connection'] %>
+<% end %>
+<% unless node['mysql']['character_set_database'].nil? %>
+character_set_database = <%= node['mysql']['character_set_database'] %>
+<% end %>
+<% unless node['mysql']['character_set_filesystem'].nil? %>
+character_set_filesystem = <%= node['mysql']['character_set_filesystem'] %>
+<% end %>
+<% unless node['mysql']['character_set_result'].nil? %>
+character_set_result = <%= node['mysql']['character_set_result'] %>
+<% end %>
+<% unless node['mysql']['character_set_server'].nil? %>
+character_set_server = <%= node['mysql']['character_set_server'] %>
+<% end %>
+<% unless node['mysql']['collation_connection'].nil? %>
+collation_connection = <%= node['mysql']['collation_connection'] %>
+<% end %>
+<% unless node['mysql']['collation_server'].nil? %>
+collation_server = <%= node['mysql']['collation_server'] %>
+<% end %>
+<% unless node['mysql']['completion_type'].nil? %>
+completion_type = <%= node['mysql']['completion_type'] %>
+<% end %>
+<% unless node['mysql']['concurrent_insert'].nil? %>
+concurrent_insert = <%= node['mysql']['concurrent_insert'] %>
+<% end %>
+<% unless node['mysql']['connect_timeout'].nil? %>
+connect_timeout = <%= node['mysql']['connect_timeout'] %>
+<% end %>
+<% unless node['mysql']['default_time_zone'].nil? %>
+default_time_zone = <%= node['mysql']['default_time_zone'] %>
+<% end %>
+<% unless node['mysql']['default_week_format'].nil? %>
+default_week_format = <%= node['mysql']['default_week_format'] %>
+<% end %>
+<% unless node['mysql']['delay_key_write'].nil? %>
+delay_key_write = <%= node['mysql']['delay_key_write'] %>
+<% end %>
+<% unless node['mysql']['delayed_insert_limit'].nil? %>
+delayed_insert_limit = <%= node['mysql']['delayed_insert_limit'] %>
+<% end %>
+<% unless node['mysql']['delayed_insert_timeout'].nil? %>
+delayed_insert_timeout = <%= node['mysql']['delayed_insert_timeout'] %>
+<% end %>
+<% unless node['mysql']['delayed_queue_size'].nil? %>
+delayed_queue_size = <%= node['mysql']['delayed_queue_size'] %>
+<% end %>
+<% unless node['mysql']['div_precision_increment'].nil? %>
+div_precision_increment = <%= node['mysql']['div_precision_increment'] %>
+<% end %>
+<% unless node['mysql']['event_scheduler'].nil? %>
+event_scheduler = <%= node['mysql']['event_scheduler'] %>
+<% end %>
+<% unless node['mysql']['flush'].nil? %>
+flush = <%= node['mysql']['flush'] %>
+<% end %>
+<% unless node['mysql']['flush_time'].nil? %>
+flush_time = <%= node['mysql']['flush_time'] %>
+<% end %>
+<% unless node['mysql']['ft_boolean_syntax'].nil? %>
+ft_boolean_syntax = <%= node['mysql']['ft_boolean_syntax'] %>
+<% end %>
+<% unless node['mysql']['ft_max_word_len'].nil? %>
+ft_max_word_len = <%= node['mysql']['ft_max_word_len'] %>
+<% end %>
+<% unless node['mysql']['ft_min_word_len'].nil? %>
+ft_min_word_len = <%= node['mysql']['ft_min_word_len'] %>
+<% end %>
+<% unless node['mysql']['ft_query_expansion_limit'].nil? %>
+ft_query_expansion_limit = <%= node['mysql']['ft_query_expansion_limit'] %>
+<% end %>
+<% unless node['mysql']['general_log'].nil? %>
+general_log = <%= node['mysql']['general_log'] %>
+<% end %>
+<% unless node['mysql']['group_concat_max_len'].nil? %>
+group_concat_max_len = <%= node['mysql']['group_concat_max_len'] %>
+<% end %>
+<% unless node['mysql']['init_connects'].nil? %>
+init_connect = <%= node['mysql']['init_connect'] %>
+<% end %>
+<% unless node['mysql']['innodb_adaptive_flushing'].nil? %>
+innodb_adaptive_flushing = <%= node['mysql']['innodb_adaptive_flushing'] %>
+<% end %>
+<% unless node['mysql']['innodb_adaptive_hash_index'].nil? %>
+innodb_adaptive_hash_index = <%= node['mysql']['innodb_adaptive_hash_index'] %>
+<% end %>
+<% unless node['mysql']['innodb_autoextend_increment'].nil? %>
+innodb_autoextend_increment = <%= node['mysql']['innodb_autoextend_increment'] %>
+<% end %>
+<% unless node['mysql']['innodb_autoinc_lock_mode'].nil? %>
+innodb_autoinc_lock_mode = <%= node['mysql']['innodb_autoinc_lock_mode'] %>
+<% end %>
+<% unless node['mysql']['innodb_buffer_pool_instances'].nil? %>
+innodb_buffer_pool_instances = <%= node['mysql']['innodb_buffer_pool_instances'] %>
+<% end %>
+<% unless node['mysql']['innodb_change_buffering'].nil? %>
+innodb_change_buffering = <%= node['mysql']['innodb_change_buffering'] %>
+<% end %>
+<% unless node['mysql']['innodb_commit_concurrency'].nil? %>
+innodb_commit_concurrency = <%= node['mysql']['innodb_commit_concurrency'] %>
+<% end %>
+<% unless node['mysql']['innodb_concurrency_tickets'].nil? %>
+innodb_concurrency_tickets = <%= node['mysql']['innodb_concurrency_tickets'] %>
+<% end %>
+<% unless node['mysql']['innodb_file_format'].nil? %>
+innodb_file_format = <%= node['mysql']['innodb_file_format'] %>
+<% end %>
+<% unless node['mysql']['innodb_force_load_corrupted'].nil? %>
+innodb_force_load_corrupted = <%= node['mysql']['innodb_force_load_corrupted'] %>
+<% end %>
+<% unless node['mysql']['innodb_io_capacity'].nil? %>
+innodb_io_capacity = <%= node['mysql']['innodb_io_capacity'] %>
+<% end %>
+<% unless node['mysql']['innodb_large_prefix'].nil? %>
+innodb_large_prefix = <%= node['mysql']['innodb_large_prefix'] %>
+<% end %>
+<% unless node['mysql']['innodb_locks_unsafe_for_binlog'].nil? %>
+innodb_locks_unsafe_for_binlog = <%= node['mysql']['innodb_locks_unsafe_for_binlog'] %>
+<% end %>
+<% unless node['mysql']['innodb_max_dirty_pages_pct'].nil? %>
+innodb_max_dirty_pages_pct = <%= node['mysql']['innodb_max_dirty_pages_pct'] %>
+<% end %>
+<% unless node['mysql']['innodb_max_purge_lag'].nil? %>
+innodb_max_purge_lag = <%= node['mysql']['innodb_max_purge_lag'] %>
+<% end %>
+<% unless node['mysql']['innodb_old_blocks_pct'].nil? %>
+innodb_old_blocks_pct = <%= node['mysql']['innodb_old_blocks_pct'] %>
+<% end %>
+<% unless node['mysql']['innodb_old_blocks_time'].nil? %>
+innodb_old_blocks_time = <%= node['mysql']['innodb_old_blocks_time'] %>
+<% end %>
+<% unless node['mysql']['innodb_open_files'].nil? %>
+innodb_open_files = <%= node['mysql']['innodb_open_files'] %>
+<% end %>
+<% unless node['mysql']['innodb_purge_batch_size'].nil? %>
+innodb_purge_batch_size = <%= node['mysql']['innodb_purge_batch_size'] %>
+<% end %>
+<% unless node['mysql']['innodb_purge_threads'].nil? %>
+innodb_purge_threads = <%= node['mysql']['innodb_purge_threads'] %>
+<% end %>
+<% unless node['mysql']['innodb_random_read_ahead'].nil? %>
+innodb_random_read_ahead = <%= node['mysql']['innodb_random_read_ahead'] %>
+<% end %>
+<% unless node['mysql']['innodb_read_ahead_threshold'].nil? %>
+innodb_read_ahead_threshold = <%= node['mysql']['innodb_read_ahead_threshold'] %>
+<% end %>
+<% unless node['mysql']['innodb_read_io_threads'].nil? %>
+innodb_read_io_threads = <%= node['mysql']['innodb_read_io_threads'] %>
+<% end %>
+<% unless node['mysql']['innodb_replication_delay'].nil? %>
+innodb_replication_delay = <%= node['mysql']['innodb_replication_delay'] %>
+<% end %>
+<% unless node['mysql']['innodb_rollback_on_timeout'].nil? %>
+innodb_rollback_on_timeout = <%= node['mysql']['innodb_rollback_on_timeout'] %>
+<% end %>
+<% unless node['mysql']['innodb_spin_wait_delay'].nil? %>
+innodb_spin_wait_delay = <%= node['mysql']['innodb_spin_wait_delay'] %>
+<% end %>
+<% unless node['mysql']['innodb_stats_on_metadata'].nil? %>
+innodb_stats_on_metadata = <%= node['mysql']['innodb_stats_on_metadata'] %>
+<% end %>
+<% unless node['mysql']['innodb_stats_sample_pages'].nil? %>
+innodb_stats_sample_pages = <%= node['mysql']['innodb_stats_sample_pages'] %>
+<% end %>
+<% unless node['mysql']['innodb_strict_mode'].nil? %>
+innodb_strict_mode = <%= node['mysql']['innodb_strict_mode'] %>
+<% end %>
+<% unless node['mysql']['innodb_sync_spin_loops'].nil? %>
+innodb_sync_spin_loops = <%= node['mysql']['innodb_sync_spin_loops'] %>
+<% end %>
+<% unless node['mysql']['innodb_table_locks'].nil? %>
+innodb_table_locks = <%= node['mysql']['innodb_table_locks'] %>
+<% end %>
+<% unless node['mysql']['innodb_thread_sleep_delay'].nil? %>
+innodb_thread_sleep_delay = <%= node['mysql']['innodb_thread_sleep_delay'] %>
+<% end %>
+<% unless node['mysql']['innodb_use_native_aio'].nil? %>
+innodb_use_native_aio = <%= node['mysql']['innodb_use_native_aio'] %>
+<% end %>
+<% unless node['mysql']['innodb_use_sys_malloc'].nil? %>
+innodb_use_sys_malloc = <%= node['mysql']['innodb_use_sys_malloc'] %>
+<% end %>
+<% unless node['mysql']['innodb_write_io_threads'].nil? %>
+innodb_write_io_threads = <%= node['mysql']['innodb_write_io_threads'] %>
+<% end %>
+<% unless node['mysql']['interactive_timeout'].nil? %>
+interactive_timeout = <%= node['mysql']['interactive_timeout'] %>
+<% end %>
+<% unless node['mysql']['join_buffer_size'].nil? %>
+join_buffer_size = <%= node['mysql']['join_buffer_size'] %>
+<% end %>
+<% unless node['mysql']['keep_files_on_create'].nil? %>
+keep_files_on_create = <%= node['mysql']['keep_files_on_create'] %>
+<% end %>
+<% unless node['mysql']['key_cache_age_threshold'].nil? %>
+key_cache_age_threshold = <%= node['mysql']['key_cache_age_threshold'] %>
+<% end %>
+<% unless node['mysql']['key_cache_block_size'].nil? %>
+key_cache_block_size = <%= node['mysql']['key_cache_block_size'] %>
+<% end %>
+<% unless node['mysql']['key_cache_division_limit'].nil? %>
+key_cache_division_limit = <%= node['mysql']['key_cache_division_limit'] %>
+<% end %>
+<% unless node['mysql']['lc_time_names'].nil? %>
+lc_time_names = <%= node['mysql']['lc_time_names'] %>
+<% end %>
+<% unless node['mysql']['lock_wait_timeout'].nil? %>
+lock_wait_timeout = <%= node['mysql']['lock_wait_timeout'] %>
+<% end %>
+<% unless node['mysql']['log_bin_trust_function_creators'].nil? %>
+log_bin_trust_function_creators = <%= node['mysql']['log_bin_trust_function_creators'] %>
+<% end %>
+<% unless node['mysql']['log_queries_not_using_indexes'].nil? %>
+log_queries_not_using_indexes = <%= node['mysql']['log_queries_not_using_indexes'] %>
+<% end %>
+<% unless node['mysql']['log_warnings'].nil? %>
+log_warnings = <%= node['mysql']['log_warnings'] %>
+<% end %>
+<% unless node['mysql']['low_priority_updates'].nil? %>
+low_priority_updates = <%= node['mysql']['low_priority_updates'] %>
+<% end %>
+<% unless node['mysql']['lower_case_table_names'].nil? %>
+lower_case_table_names = <%= node['mysql']['lower_case_table_names'] %>
+<% end %>
+<% unless node['mysql']['max_binlog_cache_size'].nil? %>
+max_binlog_cache_size = <%= node['mysql']['max_binlog_cache_size'] %>
+<% end %>
+<% unless node['mysql']['max_connect_errors'].nil? %>
+max_connect_errors = <%= node['mysql']['max_connect_errors'] %>
+<% end %>
+<% unless node['mysql']['max_delayed_threads'].nil? %>
+max_delayed_threads = <%= node['mysql']['max_delayed_threads'] %>
+<% end %>
+<% unless node['mysql']['max_error_count'].nil? %>
+max_error_count = <%= node['mysql']['max_error_count'] %>
+<% end %>
+<% unless node['mysql']['max_insert_delayed_threads'].nil? %>
+max_insert_delayed_threads = <%= node['mysql']['max_insert_delayed_threads'] %>
+<% end %>
+<% unless node['mysql']['max_join_size'].nil? %>
+max_join_size = <%= node['mysql']['max_join_size'] %>
+<% end %>
+<% unless node['mysql']['max_length_for_sort_data'].nil? %>
+max_length_for_sort_data = <%= node['mysql']['max_length_for_sort_data'] %>
+<% end %>
+<% unless node['mysql']['max_prepared_stmt_count'].nil? %>
+max_prepared_stmt_count = <%= node['mysql']['max_prepared_stmt_count'] %>
+<% end %>
+<% unless node['mysql']['max_seeks_for_key'].nil? %>
+max_seeks_for_key = <%= node['mysql']['max_seeks_for_key'] %>
+<% end %>
+<% unless node['mysql']['max_sort_length'].nil? %>
+max_sort_length = <%= node['mysql']['max_sort_length'] %>
+<% end %>
+<% unless node['mysql']['max_sp_recursion_depth'].nil? %>
+max_sp_recursion_depth = <%= node['mysql']['max_sp_recursion_depth'] %>
+<% end %>
+<% unless node['mysql']['max_tmp_tables'].nil? %>
+max_tmp_tables = <%= node['mysql']['max_tmp_tables'] %>
+<% end %>
+<% unless node['mysql']['max_user_connections'].nil? %>
+max_user_connections = <%= node['mysql']['max_user_connections'] %>
+<% end %>
+<% unless node['mysql']['max_write_lock_count'].nil? %>
+max_write_lock_count = <%= node['mysql']['max_write_lock_count'] %>
+<% end %>
+<% unless node['mysql']['metadata_locks_cache_size'].nil? %>
+metadata_locks_cache_size = <%= node['mysql']['metadata_locks_cache_size'] %>
+<% end %>
+<% unless node['mysql']['min_examined_row_limit'].nil? %>
+min_examined_row_limit = <%= node['mysql']['min_examined_row_limit'] %>
+<% end %>
+<% unless node['mysql']['myisam_data_pointer_size'].nil? %>
+myisam_data_pointer_size = <%= node['mysql']['myisam_data_pointer_size'] %>
+<% end %>
+<% unless node['mysql']['myisam_max_sort_file_size'].nil? %>
+myisam_max_sort_file_size = <%= node['mysql']['myisam_max_sort_file_size'] %>
+<% end %>
+<% unless node['mysql']['myisam_mmap_size'].nil? %>
+myisam_mmap_size = <%= node['mysql']['myisam_mmap_size'] %>
+<% end %>
+<% unless node['mysql']['myisam_sort_buffer_size'].nil? %>
+myisam_sort_buffer_size = <%= node['mysql']['myisam_sort_buffer_size'] %>
+<% end %>
+<% unless node['mysql']['myisam_stats_method'].nil? %>
+myisam_stats_method = <%= node['mysql']['myisam_stats_method'] %>
+<% end %>
+<% unless node['mysql']['myisam_use_mmap'].nil? %>
+myisam_use_mmap = <%= node['mysql']['myisam_use_mmap'] %>
+<% end %>
+<% unless node['mysql']['net_buffer_length'].nil? %>
+net_buffer_length = <%= node['mysql']['net_buffer_length'] %>
+<% end %>
+<% unless node['mysql']['net_read_timeout'].nil? %>
+net_read_timeout = <%= node['mysql']['net_read_timeout'] %>
+<% end %>
+<% unless node['mysql']['net_retry_count'].nil? %>
+net_retry_count = <%= node['mysql']['net_retry_count'] %>
+<% end %>
+<% unless node['mysql']['net_write_timeout'].nil? %>
+net_write_timeout = <%= node['mysql']['net_write_timeout'] %>
+<% end %>
+<% unless node['mysql']['old-style-user-limits'].nil? %>
+old-style-user-limits = <%= node['mysql']['old-style-user-limits'] %>
+<% end %>
+<% unless node['mysql']['old_passwords'].nil? %>
+old_passwords = <%= node['mysql']['old_passwords'] %>
+<% end %>
+<% unless node['mysql']['optimizer_prune_level'].nil? %>
+optimizer_prune_level = <%= node['mysql']['optimizer_prune_level'] %>
+<% end %>
+<% unless node['mysql']['optimizer_search_depth'].nil? %>
+optimizer_search_depth = <%= node['mysql']['optimizer_search_depth'] %>
+<% end %>
+<% unless node['mysql']['optimizer_switch'].nil? %>
+optimizer_switch = <%= node['mysql']['optimizer_switch'] %>
+<% end %>
+<% unless node['mysql']['performance_schema'].nil? %>
+performance_schema = <%= node['mysql']['performance_schema'] %>
+<% end %>
+<% unless node['mysql']['plugin_dir'].nil? %>
+plugin_dir = <%= node['mysql']['plugin_dir'] %>
+<% end %>
+<% unless node['mysql']['preload_buffer_size'].nil? %>
+preload_buffer_size = <%= node['mysql']['preload_buffer_size'] %>
+<% end %>
+<% unless node['mysql']['profiling_history_size'].nil? %>
+profiling_history_size = <%= node['mysql']['profiling_history_size'] %>
+<% end %>
+<% unless node['mysql']['query_alloc_block_size'].nil? %>
+query_alloc_block_size = <%= node['mysql']['query_alloc_block_size'] %>
+<% end %>
+<% unless node['mysql']['query_cache_limit'].nil? %>
+query_cache_limit = <%= node['mysql']['query_cache_limit'] %>
+<% end %>
+<% unless node['mysql']['query_cache_min_res_unit'].nil? %>
+query_cache_min_res_unit = <%= node['mysql']['query_cache_min_res_unit'] %>
+<% end %>
+<% unless node['mysql']['query_cache_wlock_invalidate'].nil? %>
+query_cache_wlock_invalidate = <%= node['mysql']['query_cache_wlock_invalidate'] %>
+<% end %>
+<% unless node['mysql']['query_prealloc_size'].nil? %>
+query_prealloc_size = <%= node['mysql']['query_prealloc_size'] %>
+<% end %>
+<% unless node['mysql']['range_alloc_block_size'].nil? %>
+range_alloc_block_size = <%= node['mysql']['range_alloc_block_size'] %>
+<% end %>
+<% unless node['mysql']['safe-user-create'].nil? %>
+safe-user-create = <%= node['mysql']['safe-user-create'] %>
+<% end %>
+<% unless node['mysql']['secure_auth'].nil? %>
+secure_auth = <%= node['mysql']['secure_auth'] %>
+<% end %>
+<% unless node['mysql']['skip-character-set-client-handshake'].nil? %>
+skip-character-set-client-handshake = <%= node['mysql']['skip-character-set-client-handshake'] %>
+<% end %>
+<% unless node['mysql']['skip_external_locking'].nil? %>
+skip_external_locking = <%= node['mysql']['skip_external_locking'] %>
+<% end %>
+<% unless node['mysql']['skip_name_resolve'].nil? %>
+skip_name_resolve = <%= node['mysql']['skip_name_resolve'] %>
+<% end %>
+<% unless node['mysql']['skip_show_database'].nil? %>
+skip_show_database = <%= node['mysql']['skip_show_database'] %>
+<% end %>
+<% unless node['mysql']['slow_launch_time'].nil? %>
+slow_launch_time = <%= node['mysql']['slow_launch_time'] %>
+<% end %>
+<% unless node['mysql']['sql_mode'].nil? %>
+sql_mode = <%= node['mysql']['sql_mode'] %>
+<% end %>
+<% unless node['mysql']['sql_select_limit'].nil? %>
+sql_select_limit = <%= node['mysql']['sql_select_limit'] %>
+<% end %>
+<% unless node['mysql']['sync_binlog'].nil? %>
+sync_binlog = <%= node['mysql']['sync_binlog'] %>
+<% end %>
+<% unless node['mysql']['sync_frm'].nil? %>
+sync_frm = <%= node['mysql']['sync_frm'] %>
+<% end %>
+<% unless node['mysql']['sysdate-is-now'].nil? %>
+sysdate-is-now = <%= node['mysql']['sysdate-is-now'] %>
+<% end %>
+<% unless node['mysql']['table_definition_cache'].nil? %>
+table_definition_cache = <%= node['mysql']['table_definition_cache'] %>
+<% end %>
+<% unless node['mysql']['table_open_cache'].nil? %>
+table_open_cache = <%= node['mysql']['table_open_cache'] %>
+<% end %>
+<% unless node['mysql']['temp-pool'].nil? %>
+temp-pool = <%= node['mysql']['temp-pool'] %>
+<% end %>
+<% unless node['mysql']['timed_mutexes'].nil? %>
+timed_mutexes = <%= node['mysql']['timed_mutexes'] %>
+<% end %>
+<% unless node['mysql']['transaction_alloc_block_size'].nil? %>
+transaction_alloc_block_size = <%= node['mysql']['transaction_alloc_block_size'] %>
+<% end %>
+<% unless node['mysql']['transaction_prealloc_size'].nil? %>
+transaction_prealloc_size = <%= node['mysql']['transaction_prealloc_size'] %>
+<% end %>
+<% unless node['mysql']['tx_isolation'].nil? %>
+tx_isolation = <%= node['mysql']['tx_isolation'] %>
+<% end %>
+<% unless node['mysql']['updatable_views_with_limit'].nil? %>
+updatable_views_with_limit = <%= node['mysql']['updatable_views_with_limit'] %>
+<% end %>
+<% unless node['mysql']['wait_timeout'].nil? %>
+wait_timeout = <%= node['mysql']['wait_timeout'] %>
+<% end %>
+
+

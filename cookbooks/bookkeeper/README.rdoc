@@ -1,0 +1,12 @@
+= DESCRIPTION:
+This cookbook installs bookkeeper server and runs the service. 
+
+= REQUIREMENTS:
+Java
+
+= ATTRIBUTES:
+The IP address of at least one zookeeper should be known. The default attribute is set to "localhost". Modify the value before the chef-client applies the role to the node.
+
+= USAGE:
+To use this cookbook, there is nothing to do other than overwriting the default attributes. However, the current version of this cookbook doesn't allow other values for the data directory and the log directory
+unless the overriding values represent directories that already exist in the file system. This will be fixed.

@@ -1,0 +1,115 @@
+# vim:syntax=apparmor
+# Last Modified: Tue Jun 19 17:37:30 2007
+#include <tunables/global>
+
+/usr/sbin/mysqld {
+  #include <abstractions/base>
+  #include <abstractions/nameservice>
+  #include <abstractions/user-tmp>
+  #include <abstractions/mysql>
+  #include <abstractions/winbind>
+
+  capability dac_override,
+  capability sys_resource,
+  capability setgid,
+  capability setuid,
+
+  network tcp,
+
+  /etc/hosts.allow r,
+  /etc/hosts.deny r,
+
+  /etc/mysql/*.pem r,
+  /etc/mysql/conf.d/ r,
+  /etc/mysql/conf.d/* r,
+  /etc/mysql/*.cnf r,
+  /usr/lib/mysql/plugin/ r,
+  /usr/lib/mysql/plugin/*.so* mr,
+  /usr/sbin/mysqld mr,
+  /usr/share/mysql/** r,
+  /var/log/mysql.log rw,
+  /var/log/mysql.err rw,
+
+<% unless node['mysql']['data_dir'].nil? %>
+  <% if node['mysql']['data_dir'][-1, 1].eql? "/" %>
+  <%= node['mysql']['data_dir'] %> r,
+  <%= node['mysql']['data_dir'] %>** rwk,
+  <% elsif %>
+  <%= node['mysql']['data_dir'] %>/ r,
+  <%= node['mysql']['data_dir'] %>/** rwk,
+  <% end %>
+<% end %>
+<% unless node['mysql']['log-bin'].nil? %>
+  <% if @logbindir[-1, 1].eql? "/" %>
+  <%= @logbindir %> r,
+  <%= @logbindir %>** rwk,
+  <% elsif %>
+  <%= @logbindir %>/ r,
+  <%= @logbindir %>/** rwk,
+  <% end %>
+<% end %>
+<% unless node['mysql']['relay-log'].nil? %>
+  <% if @relaylogdir[-1, 1].eql? "/" %>
+  <%= @relaylogdir %> r,
+  <%= @relaylogdir %>** rwk,
+  <% elsif %>
+  <%= @relaylogdir %>/ r,
+  <%= @relaylogdir %>/** rwk,
+  <% end %>
+<% end %>
+<% unless node['mysql']['tmpdir'].nil? %>
+  <% if node['mysql']['tmpdir'][-1, 1].eql? "/" %>
+  <%= node['mysql']['tmpdir'] %> r,
+  <%= node['mysql']['tmpdir'] %>** rwk,
+  <% elsif %>
+  <%= node['mysql']['tmpdir'] %>/ r,
+  <%= node['mysql']['tmpdir'] %>/** rwk,
+  <% end %>
+<% end %>
+<% unless node['mysql']['innodb_data_home_dir'].nil? %>
+  <% if node['mysql']['innodb_data_home_dir'][-1, 1].eql? "/" %>
+  <%= node['mysql']['innodb_data_home_dir'] %> r,
+  <%= node['mysql']['innodb_data_home_dir'] %>** rwk,
+  <% elsif %>
+  <%= node['mysql']['innodb_data_home_dir'] %>/ r,
+  <%= node['mysql']['innodb_data_home_dir'] %>/** rwk,
+  <% end %>
+<% end %>
+<% unless node['mysql']['innodb_log_group_home_dir'].nil? %>
+  <% if node['mysql']['innodb_log_group_home_dir'][-1, 1].eql? "/" %>
+  <%= node['mysql']['innodb_log_group_home_dir'] %> r,
+  <%= node['mysql']['innodb_log_group_home_dir'] %>** rwk,
+  <% elsif %>
+  <%= node['mysql']['innodb_log_group_home_dir'] %>/ r,
+  <%= node['mysql']['innodb_log_group_home_dir'] %>/** rwk,
+  <% end %>
+<% end %>
+<% unless node['mysql']['pid_file'].nil? %>
+  <% if @pidfiledir[-1, 1].eql? "/" %>
+  <%= @pidfiledir %> r,
+  <%= @pidfiledir %>** rwk,
+  <% elsif %>
+  <%= @pidfiledir %>/ r,
+  <%= @pidfiledir %>/** rwk,
+  <% end %>
+<% end %>
+<% unless node['mysql']['pid_file'].nil? %>
+  <%= node['mysql']['pid_file'] %> w,
+<% end %>
+<% unless node['mysql']['socket'].nil? %>
+  <%= node['mysql']['socket'] %> w,
+<% end %>
+
+  /var/log/mysql/ r,
+  /var/log/mysql/* rw,
+
+#  /{,var/}run/mysqld/mysqld.pid w,
+#  /{,var/}run/mysqld/mysqld.sock w,
+
+
+  /sys/devices/system/cpu/ r,
+
+  # Site-specific additions and overrides. See local/README for details.
+  #include <local/usr.sbin.mysqld>
+}
+
