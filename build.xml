@@ -25,7 +25,7 @@
 	<property value="" name="jars.ok" />
 	<property name="hudson.url" value="jenkins.momentumsoftware.com:8080/" />
 
-	<property name="toughresources.dir" value="${project.base.dir}/../ToughResources"/>
+	<property name="toughresources.dir" value="${project.base.dir}/../TopStackResources"/>
     <import file="${toughresources.dir}/common.build.xml" />
 
 	<target name="init">
