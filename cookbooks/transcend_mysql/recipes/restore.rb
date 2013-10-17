@@ -29,8 +29,14 @@ dbSnapshotId = restore['DBSnapshotIdentifier']
 datadir = node[:mysql][:data_dir]
 
 # find the next available device
-disk = nil
+disk = "/dev/"
 disk0 = ""
+
+if node[:virtualization][:system]? nil
+  devid = Dir.glob('/dev/vd?').sort.last[-1,1].succ
+  disk0 = "vd" + devid
+end
+
 if node[:virtualization][:system].eql? "kvm"
   devid = Dir.glob('/dev/vd?').sort.last[-1,1].succ
   disk0 = "vd" + devid
@@ -45,15 +51,16 @@ if node[:virtualization][:system].eql? "lxc"
   # TODO
 end
 
-disk = "/dev/" + disk0
+disk = disk + disk0
 diskEnc = "%2Fdev%2F" + disk0
 Chef::Log.info("Virtual disk name is " + disk)
 
 # Call RDSQuery server to attach the volume to the next device available
 http_request "Signal #{req_params['ServletUrl']} to attach the volume" do
-  action :nothing
+  action :post
   url "#{req_params['ServletUrl']}?Action=AttachDBSnapshot&AcId=#{req_params['AcId']}&StackId=#{req_params['StackId']}&Device=#{diskEnc}&Snapshot=#{dbSnapshotId}"
-end.run_action(:post)
+end
+
 
 pid_file = ""
 Dir.foreach("#{datadir}") do |f2| 
