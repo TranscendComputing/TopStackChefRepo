@@ -19,9 +19,9 @@
 #
 
 
-package "memcached" do
-  action :install
-end
+# package "memcached" do
+#  action :install
+# end
 
 #package "libmemcache-dev" do  
 #	case node[:platform]  
@@ -55,6 +55,12 @@ end
 if (revision=="")
 	revision="0"
 end
+
+ruby_block "topstack install memcached" do
+    block do
+	include_recipe "transcend_topstack_host::install"
+    end     
+end 
 
 # The actual template output is specified below in the case
 template "memcached" do

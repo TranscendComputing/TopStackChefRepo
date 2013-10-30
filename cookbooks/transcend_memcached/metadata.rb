@@ -1,10 +1,12 @@
-maintainer        "Opscode, Inc."
-maintainer_email  "cookbooks@opscode.com"
+maintainer        "Transcend Computing"
+maintainer_email  "jgardner@transcendcomputing.com"
 license           "Apache 2.0"
 description       "Installs memcached and provides a define to set up an instance of memcache via runit"
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.rdoc'))
-version           "0.10.4"
-depends           "runit"
+version           "0.10.5"
+
+depends "runit"
+depends "transcend_topstack_host"
 
 recipe "memcached", "Installs and configures memcached"
 
