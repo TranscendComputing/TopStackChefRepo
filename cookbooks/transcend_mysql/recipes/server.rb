@@ -1369,10 +1369,18 @@ execute "apt-get-update" do
   not_if { File.exists? "/rdsdbdata/first_run" }
 end
 
-package "mysql-server" do
-  action :install
-  notifies :run, resources(:execute => "master user password is blank"), :immediately
-  not_if { File.exists? "/rdsdbdata/first_run" }
+# package "mysql-server" do
+#   action :install
+#   notifies :run, resources(:execute => "master user password is blank"), :immediately
+#   not_if { File.exists? "/rdsdbdata/first_run" }
+# end
+
+ruby_block "topstack install mysql-server" do
+    block do
+	include_recipe "transcend_topstack_host::install"
+    end
+    notifies :run, resources(:execute => "master user password is blank"), :immediately
+    not_if { File.exists? "/rdsdbdata/first_run" }
 end
 
 service "mysql" do

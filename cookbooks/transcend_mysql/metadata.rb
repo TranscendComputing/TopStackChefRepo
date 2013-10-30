@@ -1,9 +1,9 @@
-maintainer        "Opscode, Inc."
-maintainer_email  "cookbooks@opscode.com"
+maintainer        "Transcend Computing"
+maintainer_email  "jgardner@transcendcomputing.com"
 license           "Apache 2.0"
 description       "Installs and configures mysql for client or server"
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version           "1.2.32"
+version           "1.2.33"
 recipe            "transcend_mysql", "Includes the client recipe to configure a client"
 recipe            "transcend_mysql::client", "Installs packages required for mysql clients using run_action magic"
 recipe            "transcend_mysql::server", "Installs packages required for mysql servers w/o manual intervention"
@@ -14,6 +14,7 @@ recipe            "transcend_mysql::server_ec2", "Performs EC2-specific mountpoi
 end
 
 depends "openssl"
+depends "transcend_topstack_host"
 
 attribute "mysql/server_root_password",
   :display_name => "MySQL Server Root Password",
