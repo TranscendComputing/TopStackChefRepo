@@ -92,7 +92,7 @@
                 <filter token="user.chef.dir" value="${project.base.dir}/.chef"/>
             </filterset>
             <filterset filtersfile="${user.home}/build.properties" onmissingfiltersfile="ignore"/>
-            <filterset filtersfile="${env.core.properties}"/>
+            <filterset filtersfile="${env.properties}"/>
 			<fileset dir="${project.base.dir}/resources/raw">
 				<include name="knife.rb"/>
 			</fileset>
