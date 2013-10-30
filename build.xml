@@ -25,7 +25,7 @@
 	<property value="" name="jars.ok" />
 	<property name="hudson.url" value="jenkins.momentumsoftware.com:8080/" />
 
-	<property name="toughresources.dir" value="${project.base.dir}/../TopStackResourcesOSS"/>
+	<property name="toughresources.dir" value="${project.base.dir}/../TopStackResources"/>
     <import file="${toughresources.dir}/common.build.xml" />
 
 	<target name="init">
@@ -66,7 +66,7 @@
                 <filter token="user.chef.dir" value="${project.base.dir}/.chef"/>
             </filterset>
             <filterset filtersfile="${user.home}/build.properties" onmissingfiltersfile="ignore"/>
-            <filterset filtersfile="${env.core.properties}"/>
+            <filterset filtersfile="${env.properties}"/>
 			<fileset dir="${project.base.dir}/resources/raw">
 				<include name="knife.rb"/>
 			</fileset>
