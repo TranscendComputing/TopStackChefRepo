@@ -59,7 +59,7 @@
 		</tar>
 	</target>
 
-    <target name="deploy" depends="dist">
+    <target name="deploy" depends="use.env, use.key, dist">
         <delete file="${project.base.dir}/.chef/knife.rb"/>
         <copy todir="${project.base.dir}/.chef/">
             <filterset>
@@ -85,7 +85,7 @@
     </target>
 
     <!-- Mostly for testing purposes -->
-    <target name="list-nodes" depends="use.env, dist">
+    <target name="list-nodes" depends="use.env, use.key, dist">
         <delete file="${project.base.dir}/.chef/knife.rb"/>
         <copy todir="${project.base.dir}/.chef/">
             <filterset>
