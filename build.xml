@@ -63,7 +63,7 @@
         <delete file="${project.base.dir}/.chef/knife.rb"/>
         <copy todir="${project.base.dir}/.chef/">
             <filterset>
-                <filter token="client.keys.dir" value="${user.dir}/resources/keys"/>
+                <filter token="client.keys.dir" value="${env.keys.dir}"/>
                 <filter token="env" value="${env}" />
                 <filter token="user.chef.dir" value="${project.base.dir}/.chef"/>
             </filterset>
@@ -89,7 +89,7 @@
         <delete file="${project.base.dir}/.chef/knife.rb"/>
         <copy todir="${project.base.dir}/.chef/">
             <filterset>
-                <filter token="client.keys.dir" value="${user.dir}/resources/keys"/>
+                <filter token="client.keys.dir" value="${env.keys.dir}"/>
                 <filter token="env" value="${env}" />
                 <filter token="user.chef.dir" value="${project.base.dir}/.chef"/>
             </filterset>
