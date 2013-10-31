@@ -72,7 +72,7 @@
 			<fileset dir="${project.base.dir}/resources/raw">
 				<include name="knife.rb"/>
 			</fileset>
-        </copy> 
+        </copy>
        <exec executable="knife">
             <arg value="cookbook"/>
             <arg value="upload"/>
@@ -85,7 +85,7 @@
     </target>
 
     <!-- Mostly for testing purposes -->
-    <target name="list-nodes" depends="dist">
+    <target name="list-nodes" depends="use.env, dist">
         <delete file="${project.base.dir}/.chef/knife.rb"/>
         <copy todir="${project.base.dir}/.chef/">
             <filterset>
@@ -98,7 +98,7 @@
 			<fileset dir="${project.base.dir}/resources/raw">
 				<include name="knife.rb"/>
 			</fileset>
-        </copy> 
+        </copy>
        <exec executable="knife">
             <arg value="node"/>
             <arg value="list"/>
