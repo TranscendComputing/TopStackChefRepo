@@ -73,30 +73,30 @@ end
 # -------------------------------------------------------------------------------------------------
 
 # ----------------- override the default attributes -----------------------------------------------
-node.set['mysql']['root_user'] 				= "#{req_params['mstrUsr']}"
+node.set['mysql']['root_user']                                 = "#{req_params['mstrUsr']}"
 node.set['mysql']['server_debian_password'] = "#{req_params['mstrPsswd']}"
 node.set['mysql']['server_root_password']   = "#{req_params['mstrPsswd']}"
 node.set['mysql']['server_repl_password']   = "#{req_params['mstrPsswd']}"
 
 if(!req_params['dbName'].nil?)
-	node.set['mysql']['db_name'] = "#{req_params['dbName']}"
+        node.set['mysql']['db_name'] = "#{req_params['dbName']}"
 end
 
 if ((node['mysql']['datadir'].nil?) && (!db_params['datadir'].nil?))
-  node.set['mysql']['data_dir']				= "#{db_params['datadir']['value']}"
+  node.set['mysql']['data_dir']                                = "#{db_params['datadir']['value']}"
 end
 
 if (node['mysql']['basedir'].nil? && (!db_params['basedir'].nil?))
-  node.set['mysql']['conf_dir']				= "#{db_params['basedir']['value']}"
+  node.set['mysql']['conf_dir']                                = "#{db_params['basedir']['value']}"
 end
 if (node['mysql']['socket'].nil? && (!db_params['socket'].nil?))
-  node.set['mysql']['socket'] 				= "#{db_params['socket']['value']}"
+  node.set['mysql']['socket']                                 = "#{db_params['socket']['value']}"
 end
 if (node['mysql']['port'].nil? && (!db_params['port'].nil?))
   unless db_params['port'].eql? "{EndPointPort}"
-    node.set['mysql']['port']				= "#{db_params['port']['value']}"
+    node.set['mysql']['port']                                = "#{db_params['port']['value']}"
   else
-    node.set['mysql']['port']				= "3306"
+    node.set['mysql']['port']                                = "3306"
   end
 end
 if (node['mysql']['pid_file'].nil? && (!db_params['pid_file'].nil?))
@@ -108,91 +108,91 @@ if (node['mysql']['pid_file'].nil? && (!db_params['pid_file'].nil?))
     port = node['mysql']['port']
     newValue = value[0, indexBegin] + port + value[indexEnd + 1, value.length]
     Chef::Log.info("New value = " + newValue)
-    node.set['mysql']['pid_file']				= newValue
+    node.set['mysql']['pid_file']                                = newValue
   else
-    node.set['mysql']['pid_file']				= "#{db_params['pid_file']['value']}"
+    node.set['mysql']['pid_file']                                = "#{db_params['pid_file']['value']}"
   end
 end
 if (node['mysql']['tmpdir'].nil? && (!db_params['tmpdir'].nil?))
-  node.set['mysql']['tmpdir']					= "#{db_params['tmpdir']['value']}"
+  node.set['mysql']['tmpdir']                                        = "#{db_params['tmpdir']['value']}"
 end
 unless db_params['thread_cache_size'].nil?
-  node.set['mysql']['thread_cache_size']		= "#{db_params['thread_cache_size']['value']}"
+  node.set['mysql']['thread_cache_size']                = "#{db_params['thread_cache_size']['value']}"
 end
 if db_params['thread_cache_size'].nil?
-  node.set['mysql']['thread_cache_size']		= nil
+  node.set['mysql']['thread_cache_size']                = nil
 end
 unless db_params['key_buffer_size'].nil?
-  node.set['mysql']['key_buffer_size']		= "#{db_params['key_buffer_size']['value']}"
+  node.set['mysql']['key_buffer_size']                = "#{db_params['key_buffer_size']['value']}"
 end
 if db_params['key_buffer_size'].nil?
-  node.set['mysql']['key_buffer_size']		= nil
+  node.set['mysql']['key_buffer_size']                = nil
 end
 unless db_params['sort_buffer_size'].nil?
-  node.set['mysql']['sort_buffer_size']		= "#{db_params['sort_buffer_size']['value']}"
+  node.set['mysql']['sort_buffer_size']                = "#{db_params['sort_buffer_size']['value']}"
 end
 if db_params['sort_buffer_size'].nil?
-  node.set['mysql']['sort_buffer_size']		= nil
+  node.set['mysql']['sort_buffer_size']                = nil
 end
 unless db_params['read_buffer_size'].nil?
-  node.set['mysql']['read_buffer_size']		= "#{db_params['read_buffer_size']['value']}"
+  node.set['mysql']['read_buffer_size']                = "#{db_params['read_buffer_size']['value']}"
 end
 if db_params['read_buffer_size'].nil?
-  node.set['mysql']['read_buffer_size']		= nil
+  node.set['mysql']['read_buffer_size']                = nil
 end
 unless db_params['read_rnd_buffer_size'].nil?
-  node.set['mysql']['read_rnd_buffer_size']	= "#{db_params['read_rnd_buffer_size']['value']}"
+  node.set['mysql']['read_rnd_buffer_size']        = "#{db_params['read_rnd_buffer_size']['value']}"
 end
 if db_params['read_rnd_buffer_size'].nil?
-  node.set['mysql']['read_rnd_buffer_size']	= nil
+  node.set['mysql']['read_rnd_buffer_size']        = nil
 end
 unless db_params['max_allowed_packet'].nil?
-  node.set['mysql']['max_allowed_packet']		= "#{db_params['max_allowed_packet']['value']}"
+  node.set['mysql']['max_allowed_packet']                = "#{db_params['max_allowed_packet']['value']}"
 end
 if db_params['max_allowed_packet'].nil?
-  node.set['mysql']['max_allowed_packet']		= nil
+  node.set['mysql']['max_allowed_packet']                = nil
 end
 unless db_params['max_heap_table_size'].nil?
-  node.set['mysql']['max_heap_table_size']	= "#{db_params['max_heap_table_size']['value']}"
+  node.set['mysql']['max_heap_table_size']        = "#{db_params['max_heap_table_size']['value']}"
 end
 if db_params['max_heap_table_size'].nil?
-  node.set['mysql']['max_heap_table_size']	= nil
+  node.set['mysql']['max_heap_table_size']        = nil
 end
 unless db_params['tmp_table_size'].nil?
-  node.set['mysql']['tmp_table_size']		= "#{db_params['tmp_table_size']['value']}"
+  node.set['mysql']['tmp_table_size']                = "#{db_params['tmp_table_size']['value']}"
 end
 if db_params['tmp_table_size'].nil?
-  node.set['mysql']['tmp_table_size']		= nil
+  node.set['mysql']['tmp_table_size']                = nil
 end
 unless db_params['query_cache_size'].nil?
-  node.set['mysql']['query_cache_size']		= "#{db_params['query_cache_size']['value']}"
+  node.set['mysql']['query_cache_size']                = "#{db_params['query_cache_size']['value']}"
 end
 unless db_params['query_cache_size'].nil?
-  node.set['mysql']['query_cache_size']		= "#{db_params['query_cache_size']['value']}"
+  node.set['mysql']['query_cache_size']                = "#{db_params['query_cache_size']['value']}"
 end
 if db_params['query_cache_size'].nil?
-  node.set['mysql']['query_cache_size']		= nil
+  node.set['mysql']['query_cache_size']                = nil
 end
 if (node['mysql']['log_output'].nil? && (!db_params['log_output']['value'].nil?))
-  node.set['mysql']['log_output']				= "#{db_params['log_output']['value']}"
+  node.set['mysql']['log_output']                                = "#{db_params['log_output']['value']}"
 end
 unless db_params['slow_query_log'].nil?
-  node.set['mysql']['slow_query_log']			= "#{db_params['slow_query_log']['value']}"
+  node.set['mysql']['slow_query_log']                        = "#{db_params['slow_query_log']['value']}"
 end
 if db_params['slow_query_log'].nil?
-  node.set['mysql']['slow_query_log']			= nil
+  node.set['mysql']['slow_query_log']                        = nil
 end
 if (node['mysql']['log_error'].nil? && (!db_params['log_error'].nil?))
-  node.set['mysql']['log_error']	= "#{db_params['log_error']['value']}"
+  node.set['mysql']['log_error']        = "#{db_params['log_error']['value']}"
 end
 unless db_params['long_query_time'].nil?
-  node.set['mysql']['long_query_time']		= "#{db_params['long_query_time']['value']}"
+  node.set['mysql']['long_query_time']                = "#{db_params['long_query_time']['value']}"
 end
 if db_params['long_query_time'].nil?
-  node.set['mysql']['long_query_time']		= nil
+  node.set['mysql']['long_query_time']                = nil
 end
 if (node['mysql']['innodb_data_home_dir'].nil? && (!db_params['innodb_data_home_dir'].nil?))
-  node.set['mysql']['innodb_data_home_dir']	= "#{db_params['innodb_data_home_dir']['value']}"
+  node.set['mysql']['innodb_data_home_dir']        = "#{db_params['innodb_data_home_dir']['value']}"
 end
 unless db_params['innodb_buffer_pool_size'].nil?
   value = db_params['innodb_buffer_pool_size']['value']
@@ -214,79 +214,79 @@ if db_params['innodb_buffer_pool_size'].nil?
   node.set['mysql']['innodb_buffer_pool_size']= nil
 end
 unless db_params['innodb_flush_log_at_trx_commit'].nil?
-  node.set['mysql']['innodb_flush_log_at_trx_commit']	= "#{db_params['innodb_flush_log_at_trx_commit']['value']}"
+  node.set['mysql']['innodb_flush_log_at_trx_commit']        = "#{db_params['innodb_flush_log_at_trx_commit']['value']}"
 end
 if db_params['innodb_flush_log_at_trx_commit'].nil?
-  node.set['mysql']['innodb_flush_log_at_trx_commit']	= nil
+  node.set['mysql']['innodb_flush_log_at_trx_commit']        = nil
 end
 unless db_params['innodb_additional_mem_pool_size'].nil?
-  node.set['mysql']['innodb_additional_mem_pool_size']	= "#{db_params['innodb_additional_mem_pool_size']['value']}"
+  node.set['mysql']['innodb_additional_mem_pool_size']        = "#{db_params['innodb_additional_mem_pool_size']['value']}"
 end
 if db_params['innodb_additional_mem_pool_size'].nil?
-  node.set['mysql']['innodb_additional_mem_pool_size']	= nil
+  node.set['mysql']['innodb_additional_mem_pool_size']        = nil
 end
 unless db_params['innodb_support_xa'].nil?
-  node.set['mysql']['innodb_support_xa']	= "#{db_params['innodb_support_xa']['value']}"
+  node.set['mysql']['innodb_support_xa']        = "#{db_params['innodb_support_xa']['value']}"
 end
 if db_params['innodb_support_xa'].nil?
-  node.set['mysql']['innodb_support_xa']	= nil
+  node.set['mysql']['innodb_support_xa']        = nil
 end
 unless db_params['innodb_lock_wait_timeout'].nil?
-  node.set['mysql']['innodb_lock_wait_timeout']	= "#{db_params['innodb_lock_wait_timeout']['value']}"
+  node.set['mysql']['innodb_lock_wait_timeout']        = "#{db_params['innodb_lock_wait_timeout']['value']}"
 end
 if db_params['innodb_lock_wait_timeout'].nil?
-  node.set['mysql']['innodb_lock_wait_timeout']	= nil
+  node.set['mysql']['innodb_lock_wait_timeout']        = nil
 end
 if (node['mysql']['innodb_flush_method'].nil? && (!db_params['innodb_flush_method'].nil?))
-  node.set['mysql']['innodb_flush_method']	= "#{db_params['innodb_flush_method']['value']}"
+  node.set['mysql']['innodb_flush_method']        = "#{db_params['innodb_flush_method']['value']}"
 end
 if (node['mysql']['innodb_log_file_size'].nil? && (!db_params['innodb_log_file_size'].nil?))
-  node.set['mysql']['innodb_log_file_size']	= "#{db_params['innodb_log_file_size']['value']}"
+  node.set['mysql']['innodb_log_file_size']        = "#{db_params['innodb_log_file_size']['value']}"
 end
 unless db_params['innodb_log_buffer_size'].nil?
-  node.set['mysql']['innodb_log_buffer_size']	= "#{db_params['innodb_log_buffer_size']['value']}"
+  node.set['mysql']['innodb_log_buffer_size']        = "#{db_params['innodb_log_buffer_size']['value']}"
 end
 if db_params['innodb_log_buffer_size'].nil?
-  node.set['mysql']['innodb_log_buffer_size']	= nil
+  node.set['mysql']['innodb_log_buffer_size']        = nil
 end
 unless db_params['innodb_thread_concurrency'].nil?
-  node.set['mysql']['innodb_thread_concurrency']	= "#{db_params['innodb_thread_concurrency']['value']}"
+  node.set['mysql']['innodb_thread_concurrency']        = "#{db_params['innodb_thread_concurrency']['value']}"
 end
 if db_params['innodb_thread_concurrency'].nil?
-  node.set['mysql']['innodb_thread_concurrency']	= nil
+  node.set['mysql']['innodb_thread_concurrency']        = nil
 end
 unless db_params['binlog_cache_size'].nil?
-  node.set['mysql']['binlog_cache_size']	= "#{db_params['binlog_cache_size']['value']}"
+  node.set['mysql']['binlog_cache_size']        = "#{db_params['binlog_cache_size']['value']}"
 end
 if db_params['binlog_cache_size'].nil?
-  node.set['mysql']['binlog_cache_size']	= nil
+  node.set['mysql']['binlog_cache_size']        = nil
 end
 if (node['mysql']['binlog_format'].nil? && (!db_params['binlog_format'].nil?))
-  node.set['mysql']['binlog_format']	= "#{db_params['binlog_format']['value']}"
+  node.set['mysql']['binlog_format']        = "#{db_params['binlog_format']['value']}"
 end
 if (node['mysql']['default_storage_engine'].nil? && (!db_params['default_storage_engine'].nil?))
-  node.set['mysql']['default_storage_engine']	= "#{db_params['default_storage_engine']['value']}"
+  node.set['mysql']['default_storage_engine']        = "#{db_params['default_storage_engine']['value']}"
 end
 unless db_params['innodb_file_per_table'].nil?
-  node.set['mysql']['innodb_file_per_table']	= "#{db_params['innodb_file_per_table']['value']}"
+  node.set['mysql']['innodb_file_per_table']        = "#{db_params['innodb_file_per_table']['value']}"
 end
 if db_params['innodb_file_per_table'].nil?
-  node.set['mysql']['innodb_file_per_table']	= nil
+  node.set['mysql']['innodb_file_per_table']        = nil
 end
 if (node['mysql']['innodb_log_group_home_dir'].nil? && (!db_params['innodb_log_group_home_dir'].nil?))
-  node.set['mysql']['innodb_log_group_home_dir']	= "#{db_params['innodb_log_group_home_dir']['value']}"
+  node.set['mysql']['innodb_log_group_home_dir']        = "#{db_params['innodb_log_group_home_dir']['value']}"
 end
 unless db_params['local_infile'].nil?
-  node.set['mysql']['local_infile']	= "#{db_params['local_infile']['value']}"
+  node.set['mysql']['local_infile']        = "#{db_params['local_infile']['value']}"
 end
 if db_params['local_infile'].nil?
-  node.set['mysql']['local_infile']	= nil
+  node.set['mysql']['local_infile']        = nil
 end
 if (node['mysql']['log-bin'].nil? && (!db_params['log-bin'].nil?))
-  node.set['mysql']['log-bin']	= "#{db_params['log-bin']['value']}"
+  node.set['mysql']['log-bin']        = "#{db_params['log-bin']['value']}"
 end
 if (node['mysql']['max_binlog_size'].nil? && (!db_params['max_binlog_size'].nil?))
-  node.set['mysql']['max_binlog_size']	= "#{db_params['max_binlog_size']['value']}"
+  node.set['mysql']['max_binlog_size']        = "#{db_params['max_binlog_size']['value']}"
 end
 unless db_params['max_connections'].nil?
   value = db_params['max_connections']['value']
@@ -303,23 +303,23 @@ unless db_params['max_connections'].nil?
     evaluated = eval(evalThis).to_s()
     node.set['mysql']['max_connections']= "" + evaluated
   else
-    node.set['mysql']['max_connections']	= "#{db_params['max_connections']['value']}"
+    node.set['mysql']['max_connections']        = "#{db_params['max_connections']['value']}"
   end
 end
 unless db_params['max_connections'].nil?
-  node.set['mysql']['max_connections']	= nil
+  node.set['mysql']['max_connections']        = nil
 end
 unless db_params['read_only'].nil?
-  node.set['mysql']['read_only']	= "#{db_params['read_only']['value']}"
+  node.set['mysql']['read_only']        = "#{db_params['read_only']['value']}"
 end
 if db_params['read_only'].nil?
-  node.set['mysql']['read_only']	= nil
+  node.set['mysql']['read_only']        = nil
 end
 if (node['mysql']['relay-log'].nil? && (!db_params['relay-log'].nil?))
-  node.set['mysql']['relay-log']	= "#{db_params['relay-log']['value']}"
+  node.set['mysql']['relay-log']        = "#{db_params['relay-log']['value']}"
 end
 if (node['mysql']['secure_file_priv'].nil? && (!db_params['secure_file_priv'].nil?))
-  node.set['mysql']['secure_file_priv']	= "#{db_params['secure_file_priv']['value']}"
+  node.set['mysql']['secure_file_priv']        = "#{db_params['secure_file_priv']['value']}"
 end
 if node['mysql']['server_id'].nil?
   unless db_params['server_id'].nil?
@@ -329,861 +329,861 @@ if node['mysql']['server_id'].nil?
       random_num = rand(4294967296)
       node.set['mysql']['server_id'] = random_num
     elsif node['mysql']['server_id'].nil?
-      node.set['mysql']['server_id']	= "#{db_params['server_id']['value']}"
+      node.set['mysql']['server_id']        = "#{db_params['server_id']['value']}"
     end
   end
 end
 unless db_params['thread_stack'].nil?
-  node.set['mysql']['thread_stack']	= "#{db_params['thread_stack']['value']}"
+  node.set['mysql']['thread_stack']        = "#{db_params['thread_stack']['value']}"
 end
 if db_params['thread_stack'].nil?
-  node.set['mysql']['thread_stack']	= nil
+  node.set['mysql']['thread_stack']        = nil
 end
 if (node['mysql']['allow-suspicious-udfs'].nil? && (!db_params['allow-suspicious-udfs'].nil?))
-  node.set['mysql']['allow-suspicious-udfs']	= "#{db_params['allow-suspicious-udfs']['value']}"
+  node.set['mysql']['allow-suspicious-udfs']        = "#{db_params['allow-suspicious-udfs']['value']}"
 end
 unless db_params['auto_increment_increment'].nil?
-  node.set['mysql']['auto_increment_increment']	= "#{db_params['auto_increment_increment']['value']}"
+  node.set['mysql']['auto_increment_increment']        = "#{db_params['auto_increment_increment']['value']}"
 end
 if db_params['auto_increment_increment'].nil?
-  node.set['mysql']['auto_increment_increment']	= nil
+  node.set['mysql']['auto_increment_increment']        = nil
 end
 unless db_params['auto_increment_offset'].nil?
-  node.set['mysql']['auto_increment_offset']	= "#{db_params['auto_increment_offset']['value']}"
+  node.set['mysql']['auto_increment_offset']        = "#{db_params['auto_increment_offset']['value']}"
 end
 if db_params['auto_increment_offset'].nil?
-  node.set['mysql']['auto_increment_offset']	= nil
+  node.set['mysql']['auto_increment_offset']        = nil
 end
 unless db_params['autocommit'].nil?
-  node.set['mysql']['autocommit']	= "#{db_params['autocommit']['value']}"
+  node.set['mysql']['autocommit']        = "#{db_params['autocommit']['value']}"
 end
 if db_params['autocommit'].nil?
-  node.set['mysql']['autocommit']	= nil
+  node.set['mysql']['autocommit']        = nil
 end
 unless db_params['automatic_sp_privileges'].nil?
-  node.set['mysql']['automatic_sp_privileges']	= "#{db_params['automatic_sp_privileges']['value']}"
+  node.set['mysql']['automatic_sp_privileges']        = "#{db_params['automatic_sp_privileges']['value']}"
 end
 if db_params['automatic_sp_privileges'].nil?
-  node.set['mysql']['automatic_sp_privileges']	= nil
+  node.set['mysql']['automatic_sp_privileges']        = nil
 end
 unless db_params['back_log'].nil?
-  node.set['mysql']['back_log']	= "#{db_params['back_log']['value']}"
+  node.set['mysql']['back_log']        = "#{db_params['back_log']['value']}"
 end
 if db_params['back_log'].nil?
-  node.set['mysql']['back_log']	= nil
+  node.set['mysql']['back_log']        = nil
 end
 unless db_params['bulk_insert_buffer_size'].nil?
-  node.set['mysql']['bulk_insert_buffer_size']	= "#{db_params['bulk_insert_buffer_size']['value']}"
+  node.set['mysql']['bulk_insert_buffer_size']        = "#{db_params['bulk_insert_buffer_size']['value']}"
 end
 if db_params['bulk_insert_buffer_size'].nil?
-  node.set['mysql']['bulk_insert_buffer_size']	= nil
+  node.set['mysql']['bulk_insert_buffer_size']        = nil
 end
 unless db_params['character-set-client-handshake'].nil?
-  node.set['mysql']['character-set-client-handshake']	= "#{db_params['character-set-client-handshake']['value']}"
+  node.set['mysql']['character-set-client-handshake']        = "#{db_params['character-set-client-handshake']['value']}"
 end
 if db_params['character-set-client-handshake'].nil?
-  node.set['mysql']['character-set-client-handshake']	= nil
+  node.set['mysql']['character-set-client-handshake']        = nil
 end
 unless db_params['character_set_client'].nil?
-  node.set['mysql']['character_set_client']	= "#{db_params['character_set_client']['value']}"
+  node.set['mysql']['character_set_client']        = "#{db_params['character_set_client']['value']}"
 end
 if db_params['character_set_client'].nil?
-  node.set['mysql']['character_set_client']	= nil
+  node.set['mysql']['character_set_client']        = nil
 end
 unless db_params['character_set_connection'].nil?
-  node.set['mysql']['character_set_connection']	= "#{db_params['character_set_connection']['value']}"
+  node.set['mysql']['character_set_connection']        = "#{db_params['character_set_connection']['value']}"
 end
 if db_params['character_set_connection'].nil?
-  node.set['mysql']['character_set_connection']	= nil
+  node.set['mysql']['character_set_connection']        = nil
 end
 unless db_params['character_set_database'].nil?
-  node.set['mysql']['character_set_database']	= "#{db_params['character_set_database']['value']}"
+  node.set['mysql']['character_set_database']        = "#{db_params['character_set_database']['value']}"
 end
 if db_params['character_set_database'].nil?
-  node.set['mysql']['character_set_database']	= nil
+  node.set['mysql']['character_set_database']        = nil
 end
 unless db_params['character_set_filesystem'].nil?
-  node.set['mysql']['character_set_filesystem']	= "#{db_params['character_set_filesystem']['value']}"
+  node.set['mysql']['character_set_filesystem']        = "#{db_params['character_set_filesystem']['value']}"
 end
 if db_params['character_set_filesystem'].nil?
-  node.set['mysql']['character_set_filesystem']	= nil
+  node.set['mysql']['character_set_filesystem']        = nil
 end
 unless db_params['character_set_result'].nil?
-  node.set['mysql']['character_set_result']	= "#{db_params['character_set_result']['value']}"
+  node.set['mysql']['character_set_result']        = "#{db_params['character_set_result']['value']}"
 end
 if db_params['character_set_result'].nil?
-  node.set['mysql']['character_set_result']	= nil
+  node.set['mysql']['character_set_result']        = nil
 end
 unless db_params['character_set_server'].nil?
-  node.set['mysql']['character_set_server']	= "#{db_params['character_set_server']['value']}"
+  node.set['mysql']['character_set_server']        = "#{db_params['character_set_server']['value']}"
 end
 if db_params['character_set_server'].nil?
-  node.set['mysql']['character_set_server']	= nil
+  node.set['mysql']['character_set_server']        = nil
 end
 unless db_params['collation_connection'].nil?
-  node.set['mysql']['collation_connection']	= "#{db_params['collation_connection']['value']}"
+  node.set['mysql']['collation_connection']        = "#{db_params['collation_connection']['value']}"
 end
 if db_params['collation_connection'].nil?
-  node.set['mysql']['collation_connection']	= nil
+  node.set['mysql']['collation_connection']        = nil
 end
 unless db_params['collation_server'].nil?
-  node.set['mysql']['collation_server']	= "#{db_params['collation_server']['value']}"
+  node.set['mysql']['collation_server']        = "#{db_params['collation_server']['value']}"
 end
 if db_params['collation_server'].nil?
-  node.set['mysql']['collation_server']	= nil
+  node.set['mysql']['collation_server']        = nil
 end
 unless db_params['completion_type'].nil?
-  node.set['mysql']['completion_type']	= "#{db_params['completion_type']['value']}"
+  node.set['mysql']['completion_type']        = "#{db_params['completion_type']['value']}"
 end
 if db_params['completion_type'].nil?
-  node.set['mysql']['completion_type']	= nil
+  node.set['mysql']['completion_type']        = nil
 end
 unless db_params['concurrent_insert'].nil?
-  node.set['mysql']['concurrent_insert']	= "#{db_params['concurrent_insert']['value']}"
+  node.set['mysql']['concurrent_insert']        = "#{db_params['concurrent_insert']['value']}"
 end
 if db_params['concurrent_insert'].nil?
-  node.set['mysql']['concurrent_insert']	= nil
+  node.set['mysql']['concurrent_insert']        = nil
 end
 unless db_params['connect_timeout'].nil?
-  node.set['mysql']['connect_timeout']	= "#{db_params['connect_timeout']['value']}"
+  node.set['mysql']['connect_timeout']        = "#{db_params['connect_timeout']['value']}"
 end
 unless db_params['connect_timeout'].nil?
-  node.set['mysql']['connect_timeout']	= nil
+  node.set['mysql']['connect_timeout']        = nil
 end
 if (node['mysql']['default_time_zone'].nil? && (!db_params['default_time_zone'].nil?))
-  node.set['mysql']['default_time_zone']	= "#{db_params['default_time_zone']['value']}"
+  node.set['mysql']['default_time_zone']        = "#{db_params['default_time_zone']['value']}"
 end
 unless db_params['default_week_format'].nil?
-  node.set['mysql']['default_week_format']	= "#{db_params['default_week_format']['value']}"
+  node.set['mysql']['default_week_format']        = "#{db_params['default_week_format']['value']}"
 end
 if db_params['default_week_format'].nil?
-  node.set['mysql']['default_week_format']	= nil
+  node.set['mysql']['default_week_format']        = nil
 end
 unless db_params['delay_key_write'].nil?
-  node.set['mysql']['delay_key_write']	= "#{db_params['delay_key_write']['value']}"
+  node.set['mysql']['delay_key_write']        = "#{db_params['delay_key_write']['value']}"
 end
 if db_params['delay_key_write'].nil?
-  node.set['mysql']['delay_key_write']	= nil
+  node.set['mysql']['delay_key_write']        = nil
 end
 unless db_params['delayed_insert_limit'].nil?
-  node.set['mysql']['delayed_insert_limit']	= "#{db_params['delayed_insert_limit']['value']}"
+  node.set['mysql']['delayed_insert_limit']        = "#{db_params['delayed_insert_limit']['value']}"
 end
 if db_params['delayed_insert_limit'].nil?
-  node.set['mysql']['delayed_insert_limit']	= nil
+  node.set['mysql']['delayed_insert_limit']        = nil
 end
 unless db_params['delayed_insert_timeout'].nil?
-  node.set['mysql']['delayed_insert_timeout']	= "#{db_params['delayed_insert_timeout']['value']}"
+  node.set['mysql']['delayed_insert_timeout']        = "#{db_params['delayed_insert_timeout']['value']}"
 end
 if db_params['delayed_insert_timeout'].nil?
-  node.set['mysql']['delayed_insert_timeout']	= nil
+  node.set['mysql']['delayed_insert_timeout']        = nil
 end
 unless db_params['delayed_queue_size'].nil?
-  node.set['mysql']['delayed_queue_size']	= "#{db_params['delayed_queue_size']['value']}"
+  node.set['mysql']['delayed_queue_size']        = "#{db_params['delayed_queue_size']['value']}"
 end
 if db_params['delayed_queue_size'].nil?
-  node.set['mysql']['delayed_queue_size']	= nil
+  node.set['mysql']['delayed_queue_size']        = nil
 end
 unless db_params['div_precision_increment'].nil?
-  node.set['mysql']['div_precision_increment']	= "#{db_params['div_precision_increment']['value']}"
+  node.set['mysql']['div_precision_increment']        = "#{db_params['div_precision_increment']['value']}"
 end
 if db_params['div_precision_increment'].nil?
-  node.set['mysql']['div_precision_increment']	= nil
+  node.set['mysql']['div_precision_increment']        = nil
 end
 unless db_params['event_scheduler'].nil?
-  node.set['mysql']['event_scheduler']	= "#{db_params['event_scheduler']['value']}"
+  node.set['mysql']['event_scheduler']        = "#{db_params['event_scheduler']['value']}"
 end
 if db_params['event_scheduler'].nil?
-  node.set['mysql']['event_scheduler']	= nil
+  node.set['mysql']['event_scheduler']        = nil
 end
 if (node['mysql']['flush'].nil? && (!db_params['flush'].nil?))
-  node.set['mysql']['flush']	= "#{db_params['flush']['value']}"
+  node.set['mysql']['flush']        = "#{db_params['flush']['value']}"
 end
 unless db_params['flush_time'].nil?
-  node.set['mysql']['flush_time']	= "#{db_params['flush_time']['value']}"
+  node.set['mysql']['flush_time']        = "#{db_params['flush_time']['value']}"
 end
 if db_params['flush_time'].nil?
-  node.set['mysql']['flush_time']	= nil
+  node.set['mysql']['flush_time']        = nil
 end
 if (node['mysql']['ft_boolean_syntax'].nil? && (!db_params['ft_boolean_syntax'].nil?))
-  node.set['mysql']['ft_boolean_syntax']	= "#{db_params['ft_boolean_syntax']['value']}"
+  node.set['mysql']['ft_boolean_syntax']        = "#{db_params['ft_boolean_syntax']['value']}"
 end
 unless db_params['ft_max_word_len'].nil?
-  node.set['mysql']['ft_max_word_len']	= "#{db_params['ft_max_word_len']['value']}"
+  node.set['mysql']['ft_max_word_len']        = "#{db_params['ft_max_word_len']['value']}"
 end
 if db_params['ft_max_word_len'].nil?
-  node.set['mysql']['ft_max_word_len']	= nil
+  node.set['mysql']['ft_max_word_len']        = nil
 end
 unless db_params['ft_min_word_len'].nil?
-  node.set['mysql']['ft_min_word_len']	= "#{db_params['ft_min_word_len']['value']}"
+  node.set['mysql']['ft_min_word_len']        = "#{db_params['ft_min_word_len']['value']}"
 end
 if db_params['ft_min_word_len'].nil?
-  node.set['mysql']['ft_min_word_len']	= nil
+  node.set['mysql']['ft_min_word_len']        = nil
 end
 unless db_params['ft_query_expansion_limit'].nil?
-  node.set['mysql']['ft_query_expansion_limit']	= "#{db_params['ft_query_expansion_limit']['value']}"
+  node.set['mysql']['ft_query_expansion_limit']        = "#{db_params['ft_query_expansion_limit']['value']}"
 end
 if db_params['ft_query_expansion_limit'].nil?
-  node.set['mysql']['ft_query_expansion_limit']	= nil
+  node.set['mysql']['ft_query_expansion_limit']        = nil
 end
 unless db_params['general_log'].nil?
-  node.set['mysql']['general_log']	= "#{db_params['general_log']['value']}"
+  node.set['mysql']['general_log']        = "#{db_params['general_log']['value']}"
 end
 if db_params['general_log'].nil?
-  node.set['mysql']['general_log']	= nil
+  node.set['mysql']['general_log']        = nil
 end
 unless db_params['group_concat_max_len'].nil?
-  node.set['mysql']['group_concat_max_len']	= "#{db_params['group_concat_max_len']['value']}"
+  node.set['mysql']['group_concat_max_len']        = "#{db_params['group_concat_max_len']['value']}"
 end
 if db_params['group_concat_max_len'].nil?
-  node.set['mysql']['group_concat_max_len']	= nil
+  node.set['mysql']['group_concat_max_len']        = nil
 end
 unless db_params['init_connect'].nil?
-  node.set['mysql']['init_connect']	= "#{db_params['init_connect']['value']}"
+  node.set['mysql']['init_connect']        = "#{db_params['init_connect']['value']}"
 end
 if db_params['init_connect'].nil?
-  node.set['mysql']['init_connect']	= nil
+  node.set['mysql']['init_connect']        = nil
 end
 unless db_params['innodb_adaptive_flushing'].nil?
-  node.set['mysql']['innodb_adaptive_flushing']	= "#{db_params['innodb_adaptive_flushing']['value']}"
+  node.set['mysql']['innodb_adaptive_flushing']        = "#{db_params['innodb_adaptive_flushing']['value']}"
 end
 if db_params['innodb_adaptive_flushing'].nil?
-  node.set['mysql']['innodb_adaptive_flushing']	= nil
+  node.set['mysql']['innodb_adaptive_flushing']        = nil
 end
 unless db_params['innodb_adaptive_hash_index'].nil?
-  node.set['mysql']['innodb_adaptive_hash_index']	= "#{db_params['innodb_adaptive_hash_index']['value']}"
+  node.set['mysql']['innodb_adaptive_hash_index']        = "#{db_params['innodb_adaptive_hash_index']['value']}"
 end
 if db_params['innodb_adaptive_hash_index'].nil?
-  node.set['mysql']['innodb_adaptive_hash_index']	= nil
+  node.set['mysql']['innodb_adaptive_hash_index']        = nil
 end
 unless db_params['innodb_autoextend_increment'].nil?
-  node.set['mysql']['innodb_autoextend_increment']	= "#{db_params['innodb_autoextend_increment']['value']}"
+  node.set['mysql']['innodb_autoextend_increment']        = "#{db_params['innodb_autoextend_increment']['value']}"
 end
 if db_params['innodb_autoextend_increment'].nil?
-  node.set['mysql']['innodb_autoextend_increment']	= nil
+  node.set['mysql']['innodb_autoextend_increment']        = nil
 end
 unless db_params['innodb_autoinc_lock_mode'].nil?
-  node.set['mysql']['innodb_autoinc_lock_mode']	= "#{db_params['innodb_autoinc_lock_mode']['value']}"
+  node.set['mysql']['innodb_autoinc_lock_mode']        = "#{db_params['innodb_autoinc_lock_mode']['value']}"
 end
 if db_params['innodb_autoinc_lock_mode'].nil?
-  node.set['mysql']['innodb_autoinc_lock_mode']	= nil
+  node.set['mysql']['innodb_autoinc_lock_mode']        = nil
 end
 unless db_params['innodb_buffer_pool_instances'].nil?
-  node.set['mysql']['innodb_buffer_pool_instances']	= "#{db_params['innodb_buffer_pool_instances']['value']}"
+  node.set['mysql']['innodb_buffer_pool_instances']        = "#{db_params['innodb_buffer_pool_instances']['value']}"
 end
 if db_params['innodb_buffer_pool_instances'].nil?
-  node.set['mysql']['innodb_buffer_pool_instances']	= nil
+  node.set['mysql']['innodb_buffer_pool_instances']        = nil
 end
 unless db_params['innodb_change_buffering'].nil?
-  node.set['mysql']['innodb_change_buffering']	= "#{db_params['innodb_change_buffering']['value']}"
+  node.set['mysql']['innodb_change_buffering']        = "#{db_params['innodb_change_buffering']['value']}"
 end
 if db_params['innodb_change_buffering'].nil?
-  node.set['mysql']['innodb_change_buffering']	= nil
+  node.set['mysql']['innodb_change_buffering']        = nil
 end
 unless db_params['innodb_commit_concurrency'].nil?
-  node.set['mysql']['innodb_commit_concurrency']	= "#{db_params['innodb_commit_concurrency']['value']}"
+  node.set['mysql']['innodb_commit_concurrency']        = "#{db_params['innodb_commit_concurrency']['value']}"
 end
 if db_params['innodb_commit_concurrency'].nil?
-  node.set['mysql']['innodb_commit_concurrency']	= nil
+  node.set['mysql']['innodb_commit_concurrency']        = nil
 end
 unless db_params['innodb_concurrency_tickets'].nil?
-  node.set['mysql']['innodb_concurrency_tickets']	= "#{db_params['innodb_concurrency_tickets']['value']}"
+  node.set['mysql']['innodb_concurrency_tickets']        = "#{db_params['innodb_concurrency_tickets']['value']}"
 end
 if db_params['innodb_concurrency_tickets'].nil?
-  node.set['mysql']['innodb_concurrency_tickets']	= nil
+  node.set['mysql']['innodb_concurrency_tickets']        = nil
 end
 unless db_params['innodb_file_format'].nil?
-  node.set['mysql']['innodb_file_format']	= "#{db_params['innodb_file_format']['value']}"
+  node.set['mysql']['innodb_file_format']        = "#{db_params['innodb_file_format']['value']}"
 end
 if db_params['innodb_file_format'].nil?
-  node.set['mysql']['innodb_file_format']	= nil
+  node.set['mysql']['innodb_file_format']        = nil
 end
 if (node['mysql']['innodb_force_load_corrupted'].nil? && (!db_params['innodb_force_load_corrupted'].nil?))
-  node.set['mysql']['innodb_force_load_corrupted']	= "#{db_params['innodb_force_load_corrupted']['value']}"
+  node.set['mysql']['innodb_force_load_corrupted']        = "#{db_params['innodb_force_load_corrupted']['value']}"
 end
 unless db_params['innodb_io_capacity'].nil?
-  node.set['mysql']['innodb_io_capacity']	= "#{db_params['innodb_io_capacity']['value']}"
+  node.set['mysql']['innodb_io_capacity']        = "#{db_params['innodb_io_capacity']['value']}"
 end
 if db_params['innodb_io_capacity'].nil?
-  node.set['mysql']['innodb_io_capacity']	= nil
+  node.set['mysql']['innodb_io_capacity']        = nil
 end
 unless db_params['innodb_large_prefix'].nil?
-  node.set['mysql']['innodb_large_prefix']	= "#{db_params['innodb_large_prefix']['value']}"
+  node.set['mysql']['innodb_large_prefix']        = "#{db_params['innodb_large_prefix']['value']}"
 end
 if db_params['innodb_large_prefix'].nil?
-  node.set['mysql']['innodb_large_prefix']	= nil
+  node.set['mysql']['innodb_large_prefix']        = nil
 end
 if (node['mysql']['innodb_locks_unsafe_for_binlog'].nil? && (!db_params['innodb_locks_unsafe_for_binlog'].nil?))
-  node.set['mysql']['innodb_locks_unsafe_for_binlog']	= "#{db_params['innodb_locks_unsafe_for_binlog']['value']}"
+  node.set['mysql']['innodb_locks_unsafe_for_binlog']        = "#{db_params['innodb_locks_unsafe_for_binlog']['value']}"
 end
 unless db_params['innodb_max_dirty_pages_pct'].nil?
-  node.set['mysql']['innodb_max_dirty_pages_pct']	= "#{db_params['innodb_max_dirty_pages_pct']['value']}"
+  node.set['mysql']['innodb_max_dirty_pages_pct']        = "#{db_params['innodb_max_dirty_pages_pct']['value']}"
 end
 if db_params['innodb_max_dirty_pages_pct'].nil?
-  node.set['mysql']['innodb_max_dirty_pages_pct']	= nil
+  node.set['mysql']['innodb_max_dirty_pages_pct']        = nil
 end
 unless db_params['innodb_max_purge_lag'].nil?
-  node.set['mysql']['innodb_max_purge_lag']	= "#{db_params['innodb_max_purge_lag']['value']}"
+  node.set['mysql']['innodb_max_purge_lag']        = "#{db_params['innodb_max_purge_lag']['value']}"
 end
 if db_params['innodb_max_purge_lag'].nil?
-  node.set['mysql']['innodb_max_purge_lag']	= nil
+  node.set['mysql']['innodb_max_purge_lag']        = nil
 end
 unless db_params['innodb_old_blocks_pct'].nil?
-  node.set['mysql']['innodb_old_blocks_pct']	= "#{db_params['innodb_old_blocks_pct']['value']}"
+  node.set['mysql']['innodb_old_blocks_pct']        = "#{db_params['innodb_old_blocks_pct']['value']}"
 end
 if db_params['innodb_old_blocks_pct'].nil?
-  node.set['mysql']['innodb_old_blocks_pct']	= nil
+  node.set['mysql']['innodb_old_blocks_pct']        = nil
 end
 unless db_params['innodb_old_blocks_time'].nil?
-  node.set['mysql']['innodb_old_blocks_time']	= "#{db_params['innodb_old_blocks_time']['value']}"
+  node.set['mysql']['innodb_old_blocks_time']        = "#{db_params['innodb_old_blocks_time']['value']}"
 end
 if db_params['innodb_old_blocks_time'].nil?
-  node.set['mysql']['innodb_old_blocks_time']	= nil
+  node.set['mysql']['innodb_old_blocks_time']        = nil
 end
 unless db_params['innodb_open_files'].nil?
-  node.set['mysql']['innodb_open_files']	= "#{db_params['innodb_open_files']['value']}"
+  node.set['mysql']['innodb_open_files']        = "#{db_params['innodb_open_files']['value']}"
 end
 if db_params['innodb_open_files'].nil?
-  node.set['mysql']['innodb_open_files']	= nil
+  node.set['mysql']['innodb_open_files']        = nil
 end
 unless db_params['innodb_purge_batch_size'].nil?
-  node.set['mysql']['innodb_purge_batch_size']	= "#{db_params['innodb_purge_batch_size']['value']}"
+  node.set['mysql']['innodb_purge_batch_size']        = "#{db_params['innodb_purge_batch_size']['value']}"
 end
 if db_params['innodb_purge_batch_size'].nil?
-  node.set['mysql']['innodb_purge_batch_size']	= nil
+  node.set['mysql']['innodb_purge_batch_size']        = nil
 end
 unless db_params['innodb_purge_threads'].nil?
-  node.set['mysql']['innodb_purge_threads']	= "#{db_params['innodb_purge_threadss']['value']}"
+  node.set['mysql']['innodb_purge_threads']        = "#{db_params['innodb_purge_threadss']['value']}"
 end
 if db_params['innodb_purge_threads'].nil?
-  node.set['mysql']['innodb_purge_threads']	= nil
+  node.set['mysql']['innodb_purge_threads']        = nil
 end
 unless db_params['innodb_random_read_ahead'].nil?
-  node.set['mysql']['innodb_random_read_ahead']	= "#{db_params['innodb_random_read_ahead']['value']}"
+  node.set['mysql']['innodb_random_read_ahead']        = "#{db_params['innodb_random_read_ahead']['value']}"
 end
 if db_params['innodb_random_read_ahead'].nil?
-  node.set['mysql']['innodb_random_read_ahead']	= nil
+  node.set['mysql']['innodb_random_read_ahead']        = nil
 end
 unless db_params['innodb_read_ahead_threshold'].nil?
-  node.set['mysql']['innodb_read_ahead_threshold']	= "#{db_params['innodb_read_ahead_threshold']['value']}"
+  node.set['mysql']['innodb_read_ahead_threshold']        = "#{db_params['innodb_read_ahead_threshold']['value']}"
 end
 if db_params['innodb_read_ahead_threshold'].nil?
-  node.set['mysql']['innodb_read_ahead_threshold']	= nil
+  node.set['mysql']['innodb_read_ahead_threshold']        = nil
 end
 unless db_params['innodb_read_io_threads'].nil?
-  node.set['mysql']['innodb_read_io_threads']	= "#{db_params['innodb_read_io_threads']['value']}"
+  node.set['mysql']['innodb_read_io_threads']        = "#{db_params['innodb_read_io_threads']['value']}"
 end
 if db_params['innodb_read_io_threads'].nil?
-  node.set['mysql']['innodb_read_io_threads']	= nil
+  node.set['mysql']['innodb_read_io_threads']        = nil
 end
 unless db_params['innodb_replication_delay'].nil?
-  node.set['mysql']['innodb_replication_delay']	= "#{db_params['innodb_replication_delay']['value']}"
+  node.set['mysql']['innodb_replication_delay']        = "#{db_params['innodb_replication_delay']['value']}"
 end
 if db_params['innodb_replication_delay'].nil?
-  node.set['mysql']['innodb_replication_delay']	= nil
+  node.set['mysql']['innodb_replication_delay']        = nil
 end
 unless db_params['innodb_rollback_on_timeout'].nil?
-  node.set['mysql']['innodb_rollback_on_timeout']	= "#{db_params['innodb_rollback_on_timeout']['value']}"
+  node.set['mysql']['innodb_rollback_on_timeout']        = "#{db_params['innodb_rollback_on_timeout']['value']}"
 end
 if db_params['innodb_rollback_on_timeout'].nil?
-  node.set['mysql']['innodb_rollback_on_timeout']	= nil
+  node.set['mysql']['innodb_rollback_on_timeout']        = nil
 end
 unless db_params['innodb_spin_wait_delay'].nil?
-  node.set['mysql']['innodb_spin_wait_delay']	= "#{db_params['innodb_spin_wait_delay']['value']}"
+  node.set['mysql']['innodb_spin_wait_delay']        = "#{db_params['innodb_spin_wait_delay']['value']}"
 end
 if db_params['innodb_spin_wait_delay'].nil?
-  node.set['mysql']['innodb_spin_wait_delay']	= nil
+  node.set['mysql']['innodb_spin_wait_delay']        = nil
 end
 unless db_params['innodb_stats_on_metadata'].nil?
-  node.set['mysql']['innodb_stats_on_metadata']	= "#{db_params['innodb_stats_on_metadata']['value']}"
+  node.set['mysql']['innodb_stats_on_metadata']        = "#{db_params['innodb_stats_on_metadata']['value']}"
 end
 if db_params['innodb_stats_on_metadata'].nil?
-  node.set['mysql']['innodb_stats_on_metadata']	= nil
+  node.set['mysql']['innodb_stats_on_metadata']        = nil
 end
 unless db_params['innodb_stats_sample_pages'].nil?
-  node.set['mysql']['innodb_stats_sample_pages']	= "#{db_params['innodb_stats_sample_pages']['value']}"
+  node.set['mysql']['innodb_stats_sample_pages']        = "#{db_params['innodb_stats_sample_pages']['value']}"
 end
 if db_params['innodb_stats_sample_pages'].nil?
-  node.set['mysql']['innodb_stats_sample_pages']	= nil
+  node.set['mysql']['innodb_stats_sample_pages']        = nil
 end
 unless db_params['innodb_strict_mode'].nil?
-  node.set['mysql']['innodb_strict_mode']	= "#{db_params['innodb_strict_mode']['value']}"
+  node.set['mysql']['innodb_strict_mode']        = "#{db_params['innodb_strict_mode']['value']}"
 end
 if db_params['innodb_strict_mode'].nil?
-  node.set['mysql']['innodb_strict_mode']	= nil
+  node.set['mysql']['innodb_strict_mode']        = nil
 end
 unless db_params['innodb_sync_spin_loops'].nil?
-  node.set['mysql']['innodb_sync_spin_loops']	= "#{db_params['innodb_sync_spin_loops']['value']}"
+  node.set['mysql']['innodb_sync_spin_loops']        = "#{db_params['innodb_sync_spin_loops']['value']}"
 end
 if db_params['innodb_sync_spin_loops'].nil?
-  node.set['mysql']['innodb_sync_spin_loops']	= nil
+  node.set['mysql']['innodb_sync_spin_loops']        = nil
 end
 unless db_params['innodb_table_locks'].nil?
-  node.set['mysql']['innodb_table_locks']	= "#{db_params['innodb_table_locks']['value']}"
+  node.set['mysql']['innodb_table_locks']        = "#{db_params['innodb_table_locks']['value']}"
 end
 if db_params['innodb_table_locks'].nil?
-  node.set['mysql']['innodb_table_locks']	= nil
+  node.set['mysql']['innodb_table_locks']        = nil
 end
 unless db_params['innodb_thread_sleep_delay'].nil?
-  node.set['mysql']['innodb_thread_sleep_delay']	= "#{db_params['innodb_thread_sleep_delay']['value']}"
+  node.set['mysql']['innodb_thread_sleep_delay']        = "#{db_params['innodb_thread_sleep_delay']['value']}"
 end
 if db_params['innodb_thread_sleep_delay'].nil?
-  node.set['mysql']['innodb_thread_sleep_delay']	= nil
+  node.set['mysql']['innodb_thread_sleep_delay']        = nil
 end
 unless db_params['innodb_use_native_aio'].nil?
-  node.set['mysql']['innodb_use_native_aio']	= "#{db_params['innodb_use_native_aio']['value']}"
+  node.set['mysql']['innodb_use_native_aio']        = "#{db_params['innodb_use_native_aio']['value']}"
 end
 if db_params['innodb_use_native_aio'].nil?
-  node.set['mysql']['innodb_use_native_aio']	= nil
+  node.set['mysql']['innodb_use_native_aio']        = nil
 end
 unless db_params['innodb_use_sys_malloc'].nil?
-  node.set['mysql']['innodb_use_sys_malloc']	= "#{db_params['innodb_use_sys_malloc']['value']}"
+  node.set['mysql']['innodb_use_sys_malloc']        = "#{db_params['innodb_use_sys_malloc']['value']}"
 end
 if db_params['innodb_use_sys_malloc'].nil?
-  node.set['mysql']['innodb_use_sys_malloc']	= nil
+  node.set['mysql']['innodb_use_sys_malloc']        = nil
 end
 unless db_params['innodb_write_io_threads'].nil?
-  node.set['mysql']['innodb_write_io_threads']	= "#{db_params['innodb_write_io_threads']['value']}"
+  node.set['mysql']['innodb_write_io_threads']        = "#{db_params['innodb_write_io_threads']['value']}"
 end
 if db_params['innodb_write_io_threads'].nil?
-  node.set['mysql']['innodb_write_io_threads']	= nil
+  node.set['mysql']['innodb_write_io_threads']        = nil
 end
 unless db_params['interactive_timeout'].nil?
-  node.set['mysql']['interactive_timeout']	= "#{db_params['interactive_timeouts']['value']}"
+  node.set['mysql']['interactive_timeout']        = "#{db_params['interactive_timeouts']['value']}"
 end
 if db_params['interactive_timeout'].nil?
-  node.set['mysql']['interactive_timeout']	= nil
+  node.set['mysql']['interactive_timeout']        = nil
 end
 unless db_params['join_buffer_size'].nil?
-  node.set['mysql']['join_buffer_size']	= "#{db_params['join_buffer_size']['value']}"
+  node.set['mysql']['join_buffer_size']        = "#{db_params['join_buffer_size']['value']}"
 end
 if db_params['join_buffer_size'].nil?
-  node.set['mysql']['join_buffer_size']	= nil
+  node.set['mysql']['join_buffer_size']        = nil
 end
 unless db_params['keep_files_on_create'].nil?
-  node.set['mysql']['keep_files_on_create']	= "#{db_params['keep_files_on_create']['value']}"
+  node.set['mysql']['keep_files_on_create']        = "#{db_params['keep_files_on_create']['value']}"
 end
 if db_params['keep_files_on_create'].nil?
-  node.set['mysql']['keep_files_on_create']	= nil
+  node.set['mysql']['keep_files_on_create']        = nil
 end
 unless db_params['key_cache_age_threshold'].nil?
-  node.set['mysql']['key_cache_age_threshold']	= "#{db_params['key_cache_age_threshold']['value']}"
+  node.set['mysql']['key_cache_age_threshold']        = "#{db_params['key_cache_age_threshold']['value']}"
 end
 if db_params['key_cache_age_threshold'].nil?
-  node.set['mysql']['key_cache_age_threshold']	= nil
+  node.set['mysql']['key_cache_age_threshold']        = nil
 end
 unless db_params['key_cache_block_size'].nil?
-  node.set['mysql']['key_cache_block_size']	= "#{db_params['key_cache_block_size']['value']}"
+  node.set['mysql']['key_cache_block_size']        = "#{db_params['key_cache_block_size']['value']}"
 end
 if db_params['key_cache_block_size'].nil?
-  node.set['mysql']['key_cache_block_size']	= nil
+  node.set['mysql']['key_cache_block_size']        = nil
 end
 unless db_params['key_cache_division_limit'].nil?
-  node.set['mysql']['key_cache_division_limit']	= "#{db_params['key_cache_division_limit']['value']}"
+  node.set['mysql']['key_cache_division_limit']        = "#{db_params['key_cache_division_limit']['value']}"
 end
 if db_params['key_cache_division_limit'].nil?
-  node.set['mysql']['key_cache_division_limit']	= nil
+  node.set['mysql']['key_cache_division_limit']        = nil
 end
 unless db_params['lc_time_names'].nil?
-  node.set['mysql']['lc_time_names']	= "#{db_params['lc_time_names']['value']}"
+  node.set['mysql']['lc_time_names']        = "#{db_params['lc_time_names']['value']}"
 end
 if db_params['lc_time_names'].nil?
-  node.set['mysql']['lc_time_names']	= nil
+  node.set['mysql']['lc_time_names']        = nil
 end
 unless db_params['lock_wait_timeout'].nil?
-  node.set['mysql']['lock_wait_timeout']	= "#{db_params['lock_wait_timeout']['value']}"
+  node.set['mysql']['lock_wait_timeout']        = "#{db_params['lock_wait_timeout']['value']}"
 end
 if db_params['lock_wait_timeout'].nil?
-  node.set['mysql']['lock_wait_timeout']	= nil
+  node.set['mysql']['lock_wait_timeout']        = nil
 end
 unless db_params['log_bin_trust_function_creators'].nil?
-  node.set['mysql']['log_bin_trust_function_creators']	= "#{db_params['log_bin_trust_function_creators']['value']}"
+  node.set['mysql']['log_bin_trust_function_creators']        = "#{db_params['log_bin_trust_function_creators']['value']}"
 end
 if db_params['log_bin_trust_function_creators'].nil?
-  node.set['mysql']['log_bin_trust_function_creators']	= nil
+  node.set['mysql']['log_bin_trust_function_creators']        = nil
 end
 unless db_params['log_queries_not_using_indexes'].nil?
-  node.set['mysql']['log_queries_not_using_indexes']	= "#{db_params['log_queries_not_using_indexes']['value']}"
+  node.set['mysql']['log_queries_not_using_indexes']        = "#{db_params['log_queries_not_using_indexes']['value']}"
 end
 if db_params['log_queries_not_using_indexes'].nil?
-  node.set['mysql']['log_queries_not_using_indexes']	= nil
+  node.set['mysql']['log_queries_not_using_indexes']        = nil
 end
 unless db_params['log_warnings'].nil?
-  node.set['mysql']['log_warnings']	= "#{db_params['log_warnings']['value']}"
+  node.set['mysql']['log_warnings']        = "#{db_params['log_warnings']['value']}"
 end
 if db_params['log_warnings'].nil?
-  node.set['mysql']['log_warnings']	= nil
+  node.set['mysql']['log_warnings']        = nil
 end
 unless db_params['low_priority_updates'].nil?
-  node.set['mysql']['low_priority_updates']	= "#{db_params['low_priority_updates']['value']}"
+  node.set['mysql']['low_priority_updates']        = "#{db_params['low_priority_updates']['value']}"
 end
 if db_params['low_priority_updates'].nil?
-  node.set['mysql']['low_priority_updates']	= nil
+  node.set['mysql']['low_priority_updates']        = nil
 end
 unless db_params['lower_case_table_names'].nil?
-  node.set['mysql']['lower_case_table_names']	= "#{db_params['lower_case_table_names']['value']}"
+  node.set['mysql']['lower_case_table_names']        = "#{db_params['lower_case_table_names']['value']}"
 end
 if db_params['lower_case_table_names'].nil?
-  node.set['mysql']['lower_case_table_names']	= nil
+  node.set['mysql']['lower_case_table_names']        = nil
 end
 unless db_params['max_binlog_cache_size'].nil?
-  node.set['mysql']['max_binlog_cache_size']	= "#{db_params['max_binlog_cache_size']['value']}"
+  node.set['mysql']['max_binlog_cache_size']        = "#{db_params['max_binlog_cache_size']['value']}"
 end
 if db_params['max_binlog_cache_size'].nil?
-  node.set['mysql']['max_binlog_cache_size']	= nil
+  node.set['mysql']['max_binlog_cache_size']        = nil
 end
 unless db_params['max_connect_errors'].nil?
-  node.set['mysql']['max_connect_errors']	= "#{db_params['max_connect_errors']['value']}"
+  node.set['mysql']['max_connect_errors']        = "#{db_params['max_connect_errors']['value']}"
 end
 if db_params['max_connect_errors'].nil?
-  node.set['mysql']['max_connect_errors']	= nil
+  node.set['mysql']['max_connect_errors']        = nil
 end
 unless db_params['max_delayed_threads'].nil?
-  node.set['mysql']['max_delayed_threads']	= "#{db_params['max_delayed_threads']['value']}"
+  node.set['mysql']['max_delayed_threads']        = "#{db_params['max_delayed_threads']['value']}"
 end
 if db_params['max_delayed_threads'].nil?
-  node.set['mysql']['max_delayed_threads']	= nil
+  node.set['mysql']['max_delayed_threads']        = nil
 end
 unless db_params['max_error_count'].nil?
-  node.set['mysql']['max_error_count']	= "#{db_params['max_error_count']['value']}"
+  node.set['mysql']['max_error_count']        = "#{db_params['max_error_count']['value']}"
 end
 if db_params['max_error_count'].nil?
-  node.set['mysql']['max_error_count']	= nil
+  node.set['mysql']['max_error_count']        = nil
 end
 unless db_params['max_insert_delayed_threads'].nil?
-  node.set['mysql']['max_insert_delayed_threads']	= "#{db_params['max_insert_delayed_threads']['value']}"
+  node.set['mysql']['max_insert_delayed_threads']        = "#{db_params['max_insert_delayed_threads']['value']}"
 end
 if db_params['max_insert_delayed_threads'].nil?
-  node.set['mysql']['max_insert_delayed_threads']	= nil
+  node.set['mysql']['max_insert_delayed_threads']        = nil
 end
 unless db_params['max_join_size'].nil?
-  node.set['mysql']['max_join_size']	= "#{db_params['max_join_size']['value']}"
+  node.set['mysql']['max_join_size']        = "#{db_params['max_join_size']['value']}"
 end
 if db_params['max_join_size'].nil?
-  node.set['mysql']['max_join_size']	= nil
+  node.set['mysql']['max_join_size']        = nil
 end
 unless db_params['max_length_for_sort_data'].nil?
-  node.set['mysql']['max_length_for_sort_data']	= "#{db_params['max_length_for_sort_data']['value']}"
+  node.set['mysql']['max_length_for_sort_data']        = "#{db_params['max_length_for_sort_data']['value']}"
 end
 if db_params['max_length_for_sort_data'].nil?
-  node.set['mysql']['max_length_for_sort_data']	= nil
+  node.set['mysql']['max_length_for_sort_data']        = nil
 end
 unless db_params['max_prepared_stmt_count'].nil?
-  node.set['mysql']['max_prepared_stmt_count']	= "#{db_params['max_prepared_stmt_count']['value']}"
+  node.set['mysql']['max_prepared_stmt_count']        = "#{db_params['max_prepared_stmt_count']['value']}"
 end
 if db_params['max_prepared_stmt_count'].nil?
-  node.set['mysql']['max_prepared_stmt_count']	= nil
+  node.set['mysql']['max_prepared_stmt_count']        = nil
 end
 unless db_params['max_seeks_for_key'].nil?
-  node.set['mysql']['max_seeks_for_key']	= "#{db_params['max_seeks_for_key']['value']}"
+  node.set['mysql']['max_seeks_for_key']        = "#{db_params['max_seeks_for_key']['value']}"
 end
 if db_params['max_seeks_for_key'].nil?
-  node.set['mysql']['max_seeks_for_key']	= nil
+  node.set['mysql']['max_seeks_for_key']        = nil
 end
 unless db_params['max_sort_length'].nil?
-  node.set['mysql']['max_sort_length']	= "#{db_params['max_sort_length']['value']}"
+  node.set['mysql']['max_sort_length']        = "#{db_params['max_sort_length']['value']}"
 end
 if db_params['max_sort_length'].nil?
-  node.set['mysql']['max_sort_length']	= nil
+  node.set['mysql']['max_sort_length']        = nil
 end
 unless db_params['max_sp_recursion_depth'].nil?
-  node.set['mysql']['max_sp_recursion_depth']	= "#{db_params['max_sp_recursion_depth']['value']}"
+  node.set['mysql']['max_sp_recursion_depth']        = "#{db_params['max_sp_recursion_depth']['value']}"
 end
 if db_params['max_sp_recursion_depth'].nil?
-  node.set['mysql']['max_sp_recursion_depth']	= nil
+  node.set['mysql']['max_sp_recursion_depth']        = nil
 end
 unless db_params['max_tmp_tables'].nil?
-  node.set['mysql']['max_tmp_tables']	= "#{db_params['max_tmp_tables']['value']}"
+  node.set['mysql']['max_tmp_tables']        = "#{db_params['max_tmp_tables']['value']}"
 end
 if db_params['max_tmp_tables'].nil?
-  node.set['mysql']['max_tmp_tables']	= nil
+  node.set['mysql']['max_tmp_tables']        = nil
 end
 unless db_params['max_user_connections'].nil?
-  node.set['mysql']['max_user_connections']	= "#{db_params['max_user_connections']['value']}"
+  node.set['mysql']['max_user_connections']        = "#{db_params['max_user_connections']['value']}"
 end
 if db_params['max_user_connections'].nil?
-  node.set['mysql']['max_user_connections']	= nil
+  node.set['mysql']['max_user_connections']        = nil
 end
 unless db_params['max_write_lock_count'].nil?
-  node.set['mysql']['max_write_lock_count']	= "#{db_params['max_write_lock_count']['value']}"
+  node.set['mysql']['max_write_lock_count']        = "#{db_params['max_write_lock_count']['value']}"
 end
 if db_params['max_write_lock_count'].nil?
-  node.set['mysql']['max_write_lock_count']	= nil
+  node.set['mysql']['max_write_lock_count']        = nil
 end
 unless db_params['metadata_locks_cache_size'].nil?
-  node.set['mysql']['metadata_locks_cache_size']	= "#{db_params['metadata_locks_cache_sizes']['value']}"
+  node.set['mysql']['metadata_locks_cache_size']        = "#{db_params['metadata_locks_cache_sizes']['value']}"
 end
 if db_params['metadata_locks_cache_size'].nil?
-  node.set['mysql']['metadata_locks_cache_size']	= nil
+  node.set['mysql']['metadata_locks_cache_size']        = nil
 end
 unless db_params['min_examined_row_limit'].nil?
-  node.set['mysql']['min_examined_row_limit']	= "#{db_params['min_examined_row_limit']['value']}"
+  node.set['mysql']['min_examined_row_limit']        = "#{db_params['min_examined_row_limit']['value']}"
 end
 if db_params['min_examined_row_limit'].nil?
-  node.set['mysql']['min_examined_row_limit']	= nil
+  node.set['mysql']['min_examined_row_limit']        = nil
 end
 unless db_params['myisam_data_pointer_size'].nil?
-  node.set['mysql']['myisam_data_pointer_size']	= "#{db_params['myisam_data_pointer_size']['value']}"
+  node.set['mysql']['myisam_data_pointer_size']        = "#{db_params['myisam_data_pointer_size']['value']}"
 end
 if db_params['myisam_data_pointer_size'].nil?
-  node.set['mysql']['myisam_data_pointer_size']	= nil
+  node.set['mysql']['myisam_data_pointer_size']        = nil
 end
 unless db_params['myisam_max_sort_file_size'].nil?
-  node.set['mysql']['myisam_max_sort_file_size']	= "#{db_params['myisam_max_sort_file_size']['value']}"
+  node.set['mysql']['myisam_max_sort_file_size']        = "#{db_params['myisam_max_sort_file_size']['value']}"
 end
 if db_params['myisam_max_sort_file_size'].nil?
-  node.set['mysql']['myisam_max_sort_file_size']	= nil
+  node.set['mysql']['myisam_max_sort_file_size']        = nil
 end
 unless db_params['myisam_mmap_size'].nil?
-  node.set['mysql']['myisam_mmap_size']	= "#{db_params['myisam_mmap_size']['value']}"
+  node.set['mysql']['myisam_mmap_size']        = "#{db_params['myisam_mmap_size']['value']}"
 end
 if db_params['myisam_mmap_size'].nil?
-  node.set['mysql']['myisam_mmap_size']	= nil
+  node.set['mysql']['myisam_mmap_size']        = nil
 end
 unless db_params['myisam_sort_buffer_size'].nil?
-  node.set['mysql']['myisam_sort_buffer_size']	= "#{db_params['myisam_sort_buffer_size']['value']}"
+  node.set['mysql']['myisam_sort_buffer_size']        = "#{db_params['myisam_sort_buffer_size']['value']}"
 end
 if db_params['myisam_sort_buffer_size'].nil?
-  node.set['mysql']['myisam_sort_buffer_size']	= nil
+  node.set['mysql']['myisam_sort_buffer_size']        = nil
 end
 unless db_params['myisam_stats_method'].nil?
-  node.set['mysql']['myisam_stats_method']	= "#{db_params['myisam_stats_method']['value']}"
+  node.set['mysql']['myisam_stats_method']        = "#{db_params['myisam_stats_method']['value']}"
 end
 if db_params['myisam_stats_method'].nil?
-  node.set['mysql']['myisam_stats_method']	= nil
+  node.set['mysql']['myisam_stats_method']        = nil
 end
 unless db_params['myisam_use_mmap'].nil?
-  node.set['mysql']['myisam_use_mmap']	= "#{db_params['myisam_use_mmap']['value']}"
+  node.set['mysql']['myisam_use_mmap']        = "#{db_params['myisam_use_mmap']['value']}"
 end
 if db_params['myisam_use_mmap'].nil?
-  node.set['mysql']['myisam_use_mmap']	= nil
+  node.set['mysql']['myisam_use_mmap']        = nil
 end
 unless db_params['net_buffer_length'].nil?
-  node.set['mysql']['net_buffer_length']	= "#{db_params['net_buffer_length']['value']}"
+  node.set['mysql']['net_buffer_length']        = "#{db_params['net_buffer_length']['value']}"
 end
 if db_params['net_buffer_length'].nil?
-  node.set['mysql']['net_buffer_length']	= nil
+  node.set['mysql']['net_buffer_length']        = nil
 end
 unless db_params['net_read_timeout'].nil?
-  node.set['mysql']['net_read_timeout']	= "#{db_params['net_read_timeout']['value']}"
+  node.set['mysql']['net_read_timeout']        = "#{db_params['net_read_timeout']['value']}"
 end
 if db_params['net_read_timeout'].nil?
-  node.set['mysql']['net_read_timeout']	= nil
+  node.set['mysql']['net_read_timeout']        = nil
 end
 unless db_params['net_retry_count'].nil?
-  node.set['mysql']['net_retry_count']	= "#{db_params['net_retry_count']['value']}"
+  node.set['mysql']['net_retry_count']        = "#{db_params['net_retry_count']['value']}"
 end
 if db_params['net_retry_count'].nil?
-  node.set['mysql']['net_retry_count']	= nil
+  node.set['mysql']['net_retry_count']        = nil
 end
 unless db_params['net_write_timeout'].nil?
-  node.set['mysql']['net_write_timeout']	= "#{db_params['net_write_timeout']['value']}"
+  node.set['mysql']['net_write_timeout']        = "#{db_params['net_write_timeout']['value']}"
 end
 if db_params['net_write_timeout'].nil?
-  node.set['mysql']['net_write_timeout']	= nil
+  node.set['mysql']['net_write_timeout']        = nil
 end
 unless db_params['old-style-user-limits'].nil?
-  node.set['mysql']['old-style-user-limits']	= "#{db_params['old-style-user-limits']['value']}"
+  node.set['mysql']['old-style-user-limits']        = "#{db_params['old-style-user-limits']['value']}"
 end
 if db_params['old-style-user-limits'].nil?
-  node.set['mysql']['old-style-user-limits']	= nil
+  node.set['mysql']['old-style-user-limits']        = nil
 end
 unless db_params['old_passwords'].nil?
-  node.set['mysql']['old_passwords']	= "#{db_params['old_passwords']['value']}"
+  node.set['mysql']['old_passwords']        = "#{db_params['old_passwords']['value']}"
 end
 if db_params['old_passwords'].nil?
-  node.set['mysql']['old_passwords']	= nil
+  node.set['mysql']['old_passwords']        = nil
 end
 unless db_params['optimizer_prune_level'].nil?
-  node.set['mysql']['optimizer_prune_level']	= "#{db_params['optimizer_prune_level']['value']}"
+  node.set['mysql']['optimizer_prune_level']        = "#{db_params['optimizer_prune_level']['value']}"
 end
 if db_params['optimizer_prune_level'].nil?
-  node.set['mysql']['optimizer_prune_level']	= nil
+  node.set['mysql']['optimizer_prune_level']        = nil
 end
 unless db_params['optimizer_search_depth'].nil?
-  node.set['mysql']['optimizer_search_depth']	= "#{db_params['optimizer_search_depth']['value']}"
+  node.set['mysql']['optimizer_search_depth']        = "#{db_params['optimizer_search_depth']['value']}"
 end
 if db_params['optimizer_search_depth'].nil?
-  node.set['mysql']['optimizer_search_depth']	= nil
+  node.set['mysql']['optimizer_search_depth']        = nil
 end
 unless db_params['optimizer_switch'].nil?
-  node.set['mysql']['optimizer_switch']	= "#{db_params['optimizer_switch']['value']}"
+  node.set['mysql']['optimizer_switch']        = "#{db_params['optimizer_switch']['value']}"
 end
 if db_params['optimizer_switch'].nil?
-  node.set['mysql']['optimizer_switch']	= nil
+  node.set['mysql']['optimizer_switch']        = nil
 end
 unless db_params['performance_schema'].nil?
-  node.set['mysql']['performance_schema']	= "#{db_params['performance_schema']['value']}"
+  node.set['mysql']['performance_schema']        = "#{db_params['performance_schema']['value']}"
 end
 if (node['mysql']['plugin_dir'].nil? && (!db_params['plugin_dir'].nil?))
-  node.set['mysql']['plugin_dir']	= "#{db_params['plugin_dir']['value']}"
+  node.set['mysql']['plugin_dir']        = "#{db_params['plugin_dir']['value']}"
 end
 unless db_params['preload_buffer_size'].nil?
-  node.set['mysql']['preload_buffer_size']	= "#{db_params['preload_buffer_size']['value']}"
+  node.set['mysql']['preload_buffer_size']        = "#{db_params['preload_buffer_size']['value']}"
 end
 if db_params['preload_buffer_size'].nil?
-  node.set['mysql']['preload_buffer_size']	= nil
+  node.set['mysql']['preload_buffer_size']        = nil
 end
 unless db_params['profiling_history_size'].nil?
-  node.set['mysql']['profiling_history_size']	= "#{db_params['profiling_history_size']['value']}"
+  node.set['mysql']['profiling_history_size']        = "#{db_params['profiling_history_size']['value']}"
 end
 if db_params['profiling_history_size'].nil?
-  node.set['mysql']['profiling_history_size']	= nil
+  node.set['mysql']['profiling_history_size']        = nil
 end
 unless db_params['query_alloc_block_size'].nil?
-  node.set['mysql']['query_alloc_block_size']	= "#{db_params['query_alloc_block_size']['value']}"
+  node.set['mysql']['query_alloc_block_size']        = "#{db_params['query_alloc_block_size']['value']}"
 end
 if db_params['query_alloc_block_size'].nil?
-  node.set['mysql']['query_alloc_block_size']	= nil
+  node.set['mysql']['query_alloc_block_size']        = nil
 end
 unless db_params['query_cache_limit'].nil?
-  node.set['mysql']['query_cache_limit']	= "#{db_params['query_cache_limit']['value']}"
+  node.set['mysql']['query_cache_limit']        = "#{db_params['query_cache_limit']['value']}"
 end
 if db_params['query_cache_limit'].nil?
-  node.set['mysql']['query_cache_limit']	= nil
+  node.set['mysql']['query_cache_limit']        = nil
 end
 unless db_params['query_cache_min_res_unit'].nil?
-  node.set['mysql']['query_cache_min_res_unit']	= "#{db_params['query_cache_min_res_unit']['value']}"
+  node.set['mysql']['query_cache_min_res_unit']        = "#{db_params['query_cache_min_res_unit']['value']}"
 end
 if db_params['query_cache_min_res_unit'].nil?
-  node.set['mysql']['query_cache_min_res_unit']	= nil
+  node.set['mysql']['query_cache_min_res_unit']        = nil
 end
 unless db_params['query_cache_wlock_invalidate'].nil?
-  node.set['mysql']['query_cache_wlock_invalidate']	= "#{db_params['query_cache_wlock_invalidate']['value']}"
+  node.set['mysql']['query_cache_wlock_invalidate']        = "#{db_params['query_cache_wlock_invalidate']['value']}"
 end
 if db_params['query_cache_wlock_invalidate'].nil?
-  node.set['mysql']['query_cache_wlock_invalidate']	= nil
+  node.set['mysql']['query_cache_wlock_invalidate']        = nil
 end
 unless db_params['query_prealloc_size'].nil?
-  node.set['mysql']['query_prealloc_size']	= "#{db_params['query_prealloc_size']['value']}"
+  node.set['mysql']['query_prealloc_size']        = "#{db_params['query_prealloc_size']['value']}"
 end
 if db_params['query_prealloc_size'].nil?
-  node.set['mysql']['query_prealloc_size']	= nil
+  node.set['mysql']['query_prealloc_size']        = nil
 end
 unless db_params['range_alloc_block_size'].nil?
-  node.set['mysql']['range_alloc_block_size']	= "#{db_params['range_alloc_block_size']['value']}"
+  node.set['mysql']['range_alloc_block_size']        = "#{db_params['range_alloc_block_size']['value']}"
 end
 if db_params['range_alloc_block_size'].nil?
-  node.set['mysql']['range_alloc_block_size']	= nil
+  node.set['mysql']['range_alloc_block_size']        = nil
 end
 unless db_params['safe-user-create'].nil?
-  node.set['mysql']['safe-user-create']	= "#{db_params['safe-user-create']['value']}"
+  node.set['mysql']['safe-user-create']        = "#{db_params['safe-user-create']['value']}"
 end
 if db_params['safe-user-create'].nil?
-  node.set['mysql']['safe-user-create']	= nil
+  node.set['mysql']['safe-user-create']        = nil
 end
 unless db_params['secure_auth'].nil?
-  node.set['mysql']['secure_auth']	= "#{db_params['secure_auth']['value']}"
+  node.set['mysql']['secure_auth']        = "#{db_params['secure_auth']['value']}"
 end
 if db_params['secure_auth'].nil?
-  node.set['mysql']['secure_auth']	= nil
+  node.set['mysql']['secure_auth']        = nil
 end
 unless db_params['skip-character-set-client-handshake'].nil?
-  node.set['mysql']['skip-character-set-client-handshake']	= "#{db_params['skip-character-set-client-handshake']['value']}"
+  node.set['mysql']['skip-character-set-client-handshake']        = "#{db_params['skip-character-set-client-handshake']['value']}"
 end
 if db_params['skip-character-set-client-handshake'].nil?
-  node.set['mysql']['skip-character-set-client-handshake']	= nil
+  node.set['mysql']['skip-character-set-client-handshake']        = nil
 end
 if (node['mysql']['skip_external_locking'].nil? && (!db_params['skip_external_locking'].nil?))
-  node.set['mysql']['skip_external_locking']	= "#{db_params['skip_external_locking']['value']}"
+  node.set['mysql']['skip_external_locking']        = "#{db_params['skip_external_locking']['value']}"
 end
 unless db_params['skip_name_resolve'].nil?
-  node.set['mysql']['skip_name_resolve']	= "#{db_params['skip_name_resolve']['value']}"
+  node.set['mysql']['skip_name_resolve']        = "#{db_params['skip_name_resolve']['value']}"
 end
 if db_params['skip_name_resolve'].nil?
-  node.set['mysql']['skip_name_resolve']	= nil
+  node.set['mysql']['skip_name_resolve']        = nil
 end
 if (node['mysql']['skip_show_database'].nil? && (!db_params['skip_show_database'].nil?))
-  node.set['mysql']['skip_show_database']	= "#{db_params['skip_show_database']['value']}"
+  node.set['mysql']['skip_show_database']        = "#{db_params['skip_show_database']['value']}"
 end
 unless db_params['slow_launch_time'].nil?
-  node.set['mysql']['slow_launch_time']	= "#{db_params['slow_launch_time']['value']}"
+  node.set['mysql']['slow_launch_time']        = "#{db_params['slow_launch_time']['value']}"
 end
 if db_params['slow_launch_time'].nil?
-  node.set['mysql']['slow_launch_time']	= nil
+  node.set['mysql']['slow_launch_time']        = nil
 end
 unless db_params['sql_mode'].nil?
-  node.set['mysql']['sql_mode']	= "#{db_params['sql_mode']['value']}"
+  node.set['mysql']['sql_mode']        = "#{db_params['sql_mode']['value']}"
 end
 if db_params['sql_mode'].nil?
-  node.set['mysql']['sql_mode']	= nil
+  node.set['mysql']['sql_mode']        = nil
 end
 unless db_params['sql_select_limit'].nil?
-  node.set['mysql']['sql_select_limit']	= "#{db_params['sql_select_limit']['value']}"
+  node.set['mysql']['sql_select_limit']        = "#{db_params['sql_select_limit']['value']}"
 end
 if db_params['sql_select_limit'].nil?
-  node.set['mysql']['sql_select_limit']	= nil
+  node.set['mysql']['sql_select_limit']        = nil
 end
 unless db_params['sync_binlog'].nil?
-  node.set['mysql']['sync_binlog']	= "#{db_params['sync_binlog']['value']}"
+  node.set['mysql']['sync_binlog']        = "#{db_params['sync_binlog']['value']}"
 end
 if db_params['sync_binlog'].nil?
-  node.set['mysql']['sync_binlog']	= nil
+  node.set['mysql']['sync_binlog']        = nil
 end
 unless db_params['sync_frm'].nil?
-  node.set['mysql']['sync_frm']	= "#{db_params['sync_frm']['value']}"
+  node.set['mysql']['sync_frm']        = "#{db_params['sync_frm']['value']}"
 end
 if db_params['sync_frm'].nil?
-  node.set['mysql']['sync_frm']	= nil
+  node.set['mysql']['sync_frm']        = nil
 end
 unless db_params['sysdate-is-now'].nil?
-  node.set['mysql']['sysdate-is-now']	= "#{db_params['sysdate-is-now']['value']}"
+  node.set['mysql']['sysdate-is-now']        = "#{db_params['sysdate-is-now']['value']}"
 end
 if db_params['sysdate-is-now'].nil?
-  node.set['mysql']['sysdate-is-now']	= nil
+  node.set['mysql']['sysdate-is-now']        = nil
 end
 unless db_params['table_definition_cache'].nil?
-  node.set['mysql']['table_definition_cache']	= "#{db_params['table_definition_cache']['value']}"
+  node.set['mysql']['table_definition_cache']        = "#{db_params['table_definition_cache']['value']}"
 end
 if db_params['table_definition_cache'].nil?
-  node.set['mysql']['table_definition_cache']	= nil
+  node.set['mysql']['table_definition_cache']        = nil
 end
 unless db_params['table_open_cache'].nil?
-  node.set['mysql']['table_open_cache']	= "#{db_params['table_open_cache']['value']}"
+  node.set['mysql']['table_open_cache']        = "#{db_params['table_open_cache']['value']}"
 end
 if db_params['table_open_cache'].nil?
-  node.set['mysql']['table_open_cache']	= nil
+  node.set['mysql']['table_open_cache']        = nil
 end
 unless db_params['temp-pool'].nil?
-  node.set['mysql']['temp-pool']	= "#{db_params['temp-pool']['value']}"
+  node.set['mysql']['temp-pool']        = "#{db_params['temp-pool']['value']}"
 end
 if db_params['temp-pool'].nil?
-  node.set['mysql']['temp-pool']	= nil
+  node.set['mysql']['temp-pool']        = nil
 end
 unless db_params['timed_mutexes'].nil?
-  node.set['mysql']['timed_mutexes']	= "#{db_params['timed_mutexes']['value']}"
+  node.set['mysql']['timed_mutexes']        = "#{db_params['timed_mutexes']['value']}"
 end
 if db_params['timed_mutexes'].nil?
-  node.set['mysql']['timed_mutexes']	= nil
+  node.set['mysql']['timed_mutexes']        = nil
 end
 unless db_params['transaction_alloc_block_size'].nil?
-  node.set['mysql']['transaction_alloc_block_size']	= "#{db_params['transaction_alloc_block_size']['value']}"
+  node.set['mysql']['transaction_alloc_block_size']        = "#{db_params['transaction_alloc_block_size']['value']}"
 end
 if db_params['transaction_alloc_block_size'].nil?
-  node.set['mysql']['transaction_alloc_block_size']	= nil
+  node.set['mysql']['transaction_alloc_block_size']        = nil
 end
 unless db_params['transaction_prealloc_size'].nil?
-  node.set['mysql']['transaction_prealloc_size']	= "#{db_params['transaction_prealloc_size']['value']}"
+  node.set['mysql']['transaction_prealloc_size']        = "#{db_params['transaction_prealloc_size']['value']}"
 end
 if db_params['transaction_prealloc_size'].nil?
-  node.set['mysql']['transaction_prealloc_size']	= nil
+  node.set['mysql']['transaction_prealloc_size']        = nil
 end
 unless db_params['tx_isolation'].nil?
-  node.set['mysql']['tx_isolation']	= "#{db_params['tx_isolation']['value']}"
+  node.set['mysql']['tx_isolation']        = "#{db_params['tx_isolation']['value']}"
 end
 if db_params['tx_isolation'].nil?
-  node.set['mysql']['tx_isolation']	= nil
+  node.set['mysql']['tx_isolation']        = nil
 end
 unless db_params['updatable_views_with_limit'].nil?
-  node.set['mysql']['updatable_views_with_limit']	= "#{db_params['updatable_views_with_limit']['value']}"
+  node.set['mysql']['updatable_views_with_limit']        = "#{db_params['updatable_views_with_limit']['value']}"
 end
 if db_params['updatable_views_with_limit'].nil?
-  node.set['mysql']['updatable_views_with_limit']	= nil
+  node.set['mysql']['updatable_views_with_limit']        = nil
 end
 unless db_params['wait_timeout'].nil?
-  node.set['mysql']['wait_timeout']	= "#{db_params['wait_timeout']['value']}"
+  node.set['mysql']['wait_timeout']        = "#{db_params['wait_timeout']['value']}"
 end
 if db_params['wait_timeout'].nil?
-  node.set['mysql']['wait_timeout']	= nil
+  node.set['mysql']['wait_timeout']        = nil
 end
 # -------------------------------------------------------------------------------------------------
 
@@ -1192,6 +1192,11 @@ end
 disk = node[:mysql][:volume][:device]
 disk0 = ""
 if disk.nil?
+  if node[:virtualization][:system].eql? nil
+    devid = Dir.glob('/dev/vd?').sort.last[-1,1].succ
+    disk0 = "vd" + devid
+  end
+
   if node[:virtualization][:system].eql? "kvm"
     devid = Dir.glob('/dev/vd?').sort.last[-1,1].succ
     disk0 = "vd" + devid
@@ -1218,30 +1223,31 @@ if disk.nil?
   # wait for the next available virtual device
   ruby_block "wait for volume attachment" do
     block do
-	  lim = 0
-	  while (!File.exists?(disk) && lim < 50) do
-	    sleep(10)
-	    lim += 1
-	  end
-	  if (!File.exists?(disk) && lim == 50)
-	    Chef::Log.info(disk + " was never attached!")
-		http_request "FailHook0" do
-	      url "#{req_params['PostWaitUrl']}?Action=RemoteFailSignal&StackId=#{req_params['StackId']}&AcId=#{req_params['AcId']}"
-		  action :post
-		end
-	  end
+          lim = 0
+          while (!File.exists?(disk) && lim < 50) do
+            Chef::Log.info("Waiting for volume to attach.")
+            sleep(10)
+            lim += 1
+          end
+          if (!File.exists?(disk) && lim == 50)
+            Chef::Log.info(disk + " was never attached!")
+                http_request "FailHook0" do
+              url "#{req_params['PostWaitUrl']}?Action=RemoteFailSignal&StackId=#{req_params['StackId']}&AcId=#{req_params['AcId']}"
+                  action :post
+                end
+          end
     end
   end
 
   # rewrite the /etc/fstab written by cloudinit; manage the volumes with chef instead
   bash "modify /etc/fstab" do
-	user "root"
-	cwd "/etc"
-	code <<-EOC
-	DEVICE=`mount | grep -i "on / " | awk '{print $1}'`
-	TYPE=` mount | grep -i "on / " | awk '{print $5}'`
-	echo -e "$DEVICE\t/\t$TYPE\tdefaults\t0\t0\n#{disk}\t/rdsdbdata\text3\tdefaults,bootwait\t0\t2" > /etc/fstab
-	EOC
+        user "root"
+        cwd "/etc"
+        code <<-EOC
+        DEVICE=`mount | grep -i "on / " | awk '{print $1}'`
+        TYPE=` mount | grep -i "on / " | awk '{print $5}'`
+        echo -e "$DEVICE\t/\t$TYPE\tdefaults\t0\t0\n#{disk}\t/rdsdbdata\text3\tdefaults,bootwait\t0\t2" > /etc/fstab
+        EOC
   end
 
   node.set[:mysql][:volume][:device] = disk
@@ -1269,12 +1275,12 @@ if !rebooted
     user "root"
     cwd "/tmp"
     code <<-EOH
-  	volume=#{disk}
-  	if mount|grep $volume; then
-  	  touch /tmp/reboot_needed
-  	else
-  	  echo "not mounted"
-  	fi
+          volume=#{disk}
+          if mount|grep $volume; then
+            touch /tmp/reboot_needed
+          else
+            echo "not mounted"
+          fi
     EOH
   end
 
@@ -1282,7 +1288,7 @@ if !rebooted
   Chef::Log.debug("Restarting this instance to fix the volume attachment problem.")
   execute "rm /tmp/reboot_needed && reboot" do
     node[:mysql][:rebooted] = true
-	node.save
+        node.save
     action :run
     only_if do File.exists?("/tmp/reboot_needed") end
   end  
@@ -1314,7 +1320,7 @@ if platform?(%w{debian ubuntu})
     group "root"
     mode 0755
     recursive true
-	only_if do !File.exists?("/var/cache/local/preseeding") end
+        only_if do !File.exists?("/var/cache/local/preseeding") end
   end
 
   execute "preseed mysql-server" do
@@ -1327,7 +1333,7 @@ if platform?(%w{debian ubuntu})
     owner "root"
     group "root"
     mode "0600"
-	only_if do !File.exists?("/var/cache/local/preseeding/mysql-server.seed") end
+        only_if do !File.exists?("/var/cache/local/preseeding/mysql-server.seed") end
     notifies :run, resources(:execute => "preseed mysql-server"), :immediately
   end
 
@@ -1336,7 +1342,7 @@ if platform?(%w{debian ubuntu})
     group "root"
     mode 0755
     recursive true
-	only_if do !File.exists?("/etc/mysql") end
+        only_if do !File.exists?("/etc/mysql") end
   end
 
   template "/etc/mysql/debian.cnf" do
@@ -1344,7 +1350,7 @@ if platform?(%w{debian ubuntu})
     owner "root"
     group "root"
     mode "0644"
-	only_if do !File.exists?("/etc/mysql/debian.cnf") end
+        only_if do !File.exists?("/etc/mysql/debian.cnf") end
   end
 end
 # -------------------------------------------------------------------------------------------------
@@ -1655,7 +1661,7 @@ rescue
     group "root"
     mode "0600"
     action :create
-	not_if { File.exists? "/rdsdbdata/first_run" }
+        not_if { File.exists? "/rdsdbdata/first_run" }
   end
 end
 # -------------------------------------------------------------------------------------------------
