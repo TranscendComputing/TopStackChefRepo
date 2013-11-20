@@ -20,13 +20,17 @@
 
 ::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
 
-service_name = "MSSQL$#{node['sql_server']['instance_name']}"
+service_name = node['sql_server']['instance_name']
+if node['sql_server']['instance_name'] == 'SQLEXPRESS'
+  service_name = "MSSQL$#{node['sql_server']['instance_name']}"
+end
 
 # generate and set a password for the 'sa' super user
-node.set_unless['sql_server']['server_sa_password'] = secure_password
-node.save # force a save so we don't lose our generated password on a failed chef run
+node.set_unless['sql_server']['mstrPsswd'] = secure_password
+# force a save so we don't lose our generated password on a failed chef run
+node.save unless Chef::Config[:solo]
 
-config_file_path = File.join(Chef::Config[:file_cache_path], "ConfigurationFile.ini")
+config_file_path = win_friendly_path(File.join(Chef::Config[:file_cache_path], "ConfigurationFile.ini"))
 
 template config_file_path do
   source "ConfigurationFile.ini.erb"
@@ -35,31 +39,13 @@ end
 windows_package node['sql_server']['server']['package_name'] do
   source node['sql_server']['server']['url']
   checksum node['sql_server']['server']['checksum']
+  timeout node['sql_server']['server']['installer_timeout']
   installer_type :custom
-  options "/q /ConfigurationFile=#{Windows::Helper.win_friendly_path(config_file_path)}"
+  options "/q /ConfigurationFile=#{config_file_path}"
   action :install
-end
-
-# Workaround for CHEF-2541
-# The restart action for the Windows
-# service provider doesn't like long stops
-# Quick fix is to create a restart bat file
-# and manually set the restart_command on the 
-# service resource
-gem_package "win32-service" do
-  options '--platform=mswin32'
-  action :install
-end
-
-restart_path = File.join(node['sql_server']['install_dir'], 'restart.rb')
-
-template restart_path do
-  source "restart.rb.erb"
-  variables :service_name => service_name
 end
 
 service service_name do
-  restart_command "ruby '#{restart_path}'"
   action :nothing
 end
 

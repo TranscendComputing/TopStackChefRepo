@@ -27,7 +27,7 @@ unless node.recipe?("sql_server::server")
       source node['sql_server'][pkg]['url']
       checksum node['sql_server'][pkg]['checksum']
       installer_type :msi
-      options "IACCEPTSQLNCLILICENSETERMS=#{node['sql_server']['accept_license_terms'] ? 'YES' : 'NO'}"
+      options "IACCEPTSQLNCLILICENSETERMS=#{node['sql_server']['accept_eula'] ? 'YES' : 'NO'}"
       action :install
     end
 
@@ -40,7 +40,7 @@ unless node.recipe?("sql_server::server")
 
 end
 
-# used by SQL Server providers for 
+# used by SQL Server providers for
 # database and database_user resources
 gem_package "tiny_tds" do
   action :install

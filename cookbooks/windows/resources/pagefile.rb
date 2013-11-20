@@ -1,9 +1,9 @@
 #
-# Author:: Paul Morotn (<pmorton@biaprotect.com>)
+# Author:: Kevin Moser (<kevin.moser@nordstrom.com>)
 # Cookbook Name:: windows
-# Library:: key_helper
+# Resource:: pagefile
 #
-# Copyright:: 2011, Business Intelligence Associates, Inc
+# Copyright:: 2012, Nordstrom, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,12 @@
 # limitations under the License.
 #
 
-module Windows
-  module KeyHelper
-    AUTO_RUN_KEY = 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
-    ENV_KEY = 'HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment'
-  end
-end
+actions :set, :delete
+
+attribute :name, :kind_of => String, :name_attribute => true
+attribute :system_managed, :kind_of => [TrueClass, FalseClass]
+attribute :automatic_managed, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :initial_size, :kind_of => Integer
+attribute :maximum_size, :kind_of => Integer
+
+default_action :set

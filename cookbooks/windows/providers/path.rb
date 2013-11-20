@@ -18,11 +18,10 @@
 # limitations under the License.
 #
 
-
 action :add do
   env "PATH" do
-    action :create
-    delim ";"
+    action :modify
+    delim ::File::PATH_SEPARATOR
     value new_resource.path
   end
 end
@@ -30,7 +29,7 @@ end
 action :remove do
   env "PATH" do
     action :delete
-    delim ";"
+    delim ::File::PATH_SEPARATOR
     value new_resource.path
   end
 end

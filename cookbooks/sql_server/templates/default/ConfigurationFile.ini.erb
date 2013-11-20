@@ -14,7 +14,7 @@ PID="<%= node['sql_server']['product_key'] %>"
 ; The default is Windows Authentication. Use "SQL" for Mixed Mode Authentication.
 
 SECURITYMODE="SQL"
-SAPWD="<%= node['sql_server']['server_sa_password'] %>"
+SAPWD="<%= node['sql_server']['mstrPsswd'] %>"
 
 ; Specify the Instance ID for the SQL Server features you have specified. SQL Server directory structure, registry structure, and service names will reflect the instance ID of the SQL Server instance.
 
